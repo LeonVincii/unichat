@@ -9,7 +9,6 @@ from django.views.generic.edit import FormView
 from .forms import *
 
 
-# Create your views here.
 class HomeView(LoginRequiredMixin, TemplateView):
 	def get(self, request, *args, **kwargs):
 		return render(request, 'home/home.html', {
@@ -35,12 +34,12 @@ class UserRegisterView(FormView):
 	def post(self, request, *args, **kwargs):
 		signup_form = RegistrationForm(request.POST)
 		if signup_form.is_valid():
-			signup_form.save()
+			user = signup_form.save()
 			username = signup_form.cleaned_data.get('username')
 			password = signup_form.cleaned_data.get('password')
-			user = authenticate(username = username, password = password)
+			authenticate(username = username, password = password)
 			login(request, user)
-			return HttpResponseRedirect('')
+			return HttpResponseRedirect('/')
 		if signup_form.errors:
 			errors = signup_form.errors
 			return render(request, 'registration/register.html', {'errors': errors})
