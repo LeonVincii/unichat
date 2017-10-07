@@ -1,0 +1,55 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Register</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'registration/register.css' %}">
+	<script src="{% static 'registration/register.js' %}"></script>
+</head>
+<body>
+	{% if errors %}
+		{{ errors }}
+	{% endif %}
+	<form method="post" action="{% url 'register' %}"> {% csrf_token %}
+		<form prefix="user">
+		<table>
+		<tr>
+		    <td>Username:</td>
+		    <td><input class="register_input" name="username" type="text" title="username" required></td>
+		</tr>
+		<tr>
+		    <td>Password:</td>
+		    <td><input class="register_input" name="password" type="password" title="password" required></td>
+		</tr>
+		</table>
+		<form prefix="user_profile">
+		</form>
+			<table>
+			<tr>
+			    <td>Gender:</td>
+			    <td>
+				    <div>
+					    Male:<input class="register_input" name="gender" type="radio" title="gender-m" value="Male">
+				    </div>
+				    <div>
+					    Female:<input class="register_input" name="gender" type="radio" title="gender-f" value="Female">
+				    </div>
+			    </td>
+			</tr>
+			<tr>
+			    <td>E-mails:</td>
+			    <td><input class="register_input" name="email" type="email" title="email"></td>
+			</tr>
+			<tr>
+			    <td>Bios:</td>
+			    <td><input class="register_input" name="bios" type="text" title="bios"></td>
+			</tr>
+			</table>
+		</form>
+		<input id="submit_btn" type="submit" value="Sign Up"/>
+		<input type="hidden" name="next" value="{{ next }}"/>
+	</form>
+</body>
+</html>

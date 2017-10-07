@@ -1,0 +1,29 @@
+{% load staticfiles %}
+
+<div id="right_col_chat" class="right_col_content" style="display: none">
+	<div>
+		<div id="msg_display_header" class="row no-gutters align-items-end justify-contents-between">
+			<div id="msg_display_name" class="col-auto mr-auto align-self-center"></div>
+			<div id="msg_contact_info_placeholder" class="col-auto align-self-center">
+				<button class="btn btn-sm btn-outline-secondary">
+					<img src="{% static 'img/contact_info.png' %}">
+				</button>
+			</div>
+		</div>
+	</div>
+	<div id="msg_display_window"></div>
+	<div id="msg_typing_window">
+		<div id="msg_typing_area">
+			<textarea id="msg_typing_input" title=none></textarea>
+		</div>
+		<div id="msg_send_btn_placeholder">
+			<button id="msg_send_btn" class="btn btn-sm btn-primary">Send</button>
+		</div>
+	</div>
+</div>
+<div id="right_col_info" class="right_col_content" style="display: none">
+	Info page
+</div>
+<div id="right_col_settings" class="right_col_content" style="display: none">
+	<a id="log_out_btn" class="btn btn-primary" href="/logout">Log out</a>
+</div>

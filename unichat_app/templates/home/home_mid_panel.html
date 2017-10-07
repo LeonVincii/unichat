@@ -1,0 +1,23 @@
+{% load staticfiles %}
+
+<div id="search_panel">
+    <input id="search_input" type="text" title=none>
+	<button id="search_btn" class="btn btn-outline-secondary btn-sm">
+		<img src="{% static 'img/search.png' %}"/>
+{#		<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>#}
+	</button>
+</div>
+<div id="chat_list_panel" class="friend_list">
+    {% for chat in chat_list %}
+	    <div id="bulletin_chat" class="bulletin_chats contact_placeholder">
+            <img class="bulletin_contact_avatar" src="{% static 'img/avatar_default.png' %}"/>  {{ chat }}
+        </div>
+    {% endfor %}
+</div>
+<div id="contact_list_panel" class="friend_list" style="display: none">
+    {% for contact_obj in user_contacts %}
+	    <div id="bulletin_contact" class="bulletin_contacts contact_placeholder">
+            <img class="bulletin_contact_avatar" src="{% static 'img/avatar_default.png' %}"/> {{ contact_obj.contact_displayname }}
+        </div>
+    {% endfor %}
+</div>

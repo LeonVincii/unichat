@@ -1,0 +1,59 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% include 'js.html' %}
+	{% include 'css.html' %}
+	<link rel="stylesheet" type="text/css" href="{% static 'registration/login.css' %}">
+	<title>Login</title>
+</head>
+<body>
+	<div id="login_bg" class="container-fluid">
+		<div id="login_form_row" class="row no-gutters">
+			<div id="login_form_col" class="col">
+				<div id="login_placeholder">
+					<div id="login_header_placeholder">
+						<h1 id="login_header">Log in</h1>
+					</div>
+					<div id="login_form_placeholder">
+						{% if form.errors %}
+						<div id="login_error_msg_placeholder">
+							<div id="login_error_msg"><i>- Username or password not correct!</i></div>
+						</div>
+						{% endif %}
+						<form id="login_form" method="post" action="{% url 'login' %}">
+						{% csrf_token %}
+						<table style="width: 100%;">
+							<tr><td>Username:</td></tr>
+							<tr>
+							    <td id="username_cell">
+								    <input class="login_input" type="text" name="username" title="username" required>
+							    </td>
+							</tr>
+							<tr><td>Password:</td></tr>
+							<tr>
+							    <td id="password_cell">
+								    <input class="login_input" type="password" name="password" title="password" required>
+							    </td>
+							</tr>
+						</table>
+							<div class="row align-items-center no-gutters">
+								<div class="col-auto">
+									<input id="login_btn" class="btn btn-primary" type="submit" value="Log in" />
+								</div>
+								<div class="col-auto" style="margin-left: 10px">
+									Don't have an account?
+								</div>
+								<div class="col-auto" style="margin-left: 5px">
+									<a id="register_href" href="/register">Register</a>
+								</div>
+							</div>
+						<input type="hidden" name="next" value="{{ next }}" />
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

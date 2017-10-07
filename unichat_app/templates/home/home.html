@@ -1,0 +1,27 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% include 'js.html' %}
+	{% include 'css.html' %}
+	<link rel="stylesheet" type="text/css" href="{% static 'home/home.css' %}">
+	<script src="{% static 'home/home.js' %}"></script>
+	<title>Web Chatter</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row no-gutters">
+			<div id="left_col" class="col-auto">
+				{% include 'home/home_left_panel.html' %}
+			</div>
+			<div id="mid_col" class="col-auto">
+				{% include 'home/home_mid_panel.html' %}
+			</div>
+			<div id="right_col" class="col">
+				{% include 'home/home_right_panel.html' %}
+			</div>
+		</div>
+	</div>
+</body>
+</html>

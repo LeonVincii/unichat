@@ -1,0 +1,148 @@
+/* left col */
+#left_col {
+    height: 100vh;
+    min-height: 513px;
+    background-color: rgb(45, 50, 56);
+}
+#settings_button_placeholder {
+    margin-bottom: 10px;
+    position: absolute;
+    bottom: 0;
+}
+
+/* mid col */
+#mid_col {;
+    height: 100vh;
+    min-height: 513px;
+    max-width: 223px;
+    background-color: rgb(249, 249, 249);
+    border-right: thin solid rgb(226, 226, 226);
+}
+#search_panel {
+    width: inherit;
+    display: flex;
+    border-bottom: thin solid rgb(226, 226, 226);
+    padding: 10px
+}
+#search_input {
+    font-size: small;
+    margin-right: 10px;
+}
+
+/* right col */
+#right_col {
+    height: 100vh;
+    min-height: 513px;
+    background-color: rgb(243, 243, 243);
+}
+#msg_display_header {
+    border-bottom: thin solid rgb(226, 226, 226);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#msg_display_window {
+    min-height: 300px;
+    border-bottom: thin solid rgb(226, 226, 226);
+}
+#msg_typing_window {
+    height: 20vh;
+    min-height: 167px;
+}
+#msg_typing_area {
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#msg_typing_input {
+    background-color: transparent;
+    resize: none;
+    overflow-y: auto;
+    border: none;
+}
+#msg_typing_input:focus {
+    outline: none;
+}
+#msg_send_btn_placeholder {
+    height: 50px;
+}
+#msg_send_btn {
+    height: 30px;
+    width: 50px;
+    border: none;
+    background-color: rgb(0, 172, 72);
+    position: absolute;
+    right: 0;
+    margin: 10px;
+}
+#log_out_btn {
+    background-color: rgb(230, 30, 30);
+    border: none;
+    margin: 10px;
+}
+#log_out_btn:active {
+    background-color: rgb(190, 30, 30);
+    border: none;
+    margin: 10px;
+}
+
+/* classes */
+/* overall */
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.container {
+    padding: 0;
+    margin: 0;
+}
+.container-fluid {
+    height: 100vh;
+    width: 100vw;
+    min-width: 800px;
+    padding: 0;
+    margin: 0;
+}
+.btn-outline-secondary {
+    border-color: transparent;
+    display: block;
+    padding: 0;
+}
+
+/* left col */
+.left_btn {
+    height: 50px;
+    width: 50px;
+    margin: 10px;
+    border-color: transparent;
+}
+.left_btn_img {
+    width: 50px;
+    height: 50px;
+}
+.list {
+    padding: 0;
+    list-style-type: none;
+}
+.avatar_placeholder {
+    height: 50px;
+    width: 50px;
+    margin: 10px;
+}
+
+/* mid col */
+.contact_placeholder {
+    padding: 10px;
+    display: flex;
+    border-bottom: thin solid rgb(236, 236, 236);
+    align-content: flex-start;
+}
+.bulletin_contact_avatar {
+    padding-right: 10px;
+}
+.friend_list {
+    height: 100px;
+    overflow-y: auto;
+}
+
+/* right col */
