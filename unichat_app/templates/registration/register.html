@@ -13,7 +13,6 @@
 		{{ errors }}
 	{% endif %}
 	<form method="post" action="{% url 'register' %}"> {% csrf_token %}
-		<form prefix="user">
 		<table>
 		<tr>
 		    <td>Username:</td>
@@ -21,33 +20,32 @@
 		</tr>
 		<tr>
 		    <td>Password:</td>
-		    <td><input class="register_input" name="password" type="password" title="password" required></td>
+		    <td><input class="register_input" name="password1" type="password" title="password" required></td>
+		</tr>
+		<tr>
+		    <td>Confirm password:</td>
+		    <td><input class="register_input" name="password2" type="password" title="password" required></td>
+		</tr>
+		<tr>
+		    <td>Gender:</td>
+		    <td>
+			    <div>
+				    Male:<input class="register_input" name="gender" type="radio" title="gender-m" value="M">
+			    </div>
+			    <div>
+				    Female:<input class="register_input" name="gender" type="radio" title="gender-f" value="F">
+			    </div>
+		    </td>
+		</tr>
+		<tr>
+		    <td>E-mails:</td>
+		    <td><input class="register_input" name="email" type="email" title="email"></td>
+		</tr>
+		<tr>
+		    <td>Bios:</td>
+		    <td><input class="register_input" name="bios" type="text" title="bios"></td>
 		</tr>
 		</table>
-		<form prefix="user_profile">
-		</form>
-			<table>
-			<tr>
-			    <td>Gender:</td>
-			    <td>
-				    <div>
-					    Male:<input class="register_input" name="gender" type="radio" title="gender-m" value="Male">
-				    </div>
-				    <div>
-					    Female:<input class="register_input" name="gender" type="radio" title="gender-f" value="Female">
-				    </div>
-			    </td>
-			</tr>
-			<tr>
-			    <td>E-mails:</td>
-			    <td><input class="register_input" name="email" type="email" title="email"></td>
-			</tr>
-			<tr>
-			    <td>Bios:</td>
-			    <td><input class="register_input" name="bios" type="text" title="bios"></td>
-			</tr>
-			</table>
-		</form>
 		<input id="submit_btn" type="submit" value="Sign Up"/>
 		<input type="hidden" name="next" value="{{ next }}"/>
 	</form>
