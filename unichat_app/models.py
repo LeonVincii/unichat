@@ -64,9 +64,20 @@ class Contact(models.Model):
 	add_date = models.DateField(auto_now = True)
 
 	def __str__(self):
-		return self.user.username + ' -> ' + self.contact_username
+		return self.user.username + ' +-> ' + self.contact_username
 
 	def clean(self):
 		if not self.contact_remarkname:
 			self.contact_remarkname = self.contact_username
 
+class ChatList(models.Model):
+	user = models.ForeignKey(User)
+	chat_username = models.CharField(max_length = 25)
+
+	def __str__(self):
+		return self.user.username + ' :-> ' + self.chat_username
+
+	def clean(self):
+		chat_user = Contact.objects.filter(user = self.user, contact_username = self.chat_username)
+		if not chat_user:
+			raise ValidationError('%(user)s isn\'t your contact', params = {'user': self.chat_username})
