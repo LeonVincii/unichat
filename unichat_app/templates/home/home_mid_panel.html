@@ -17,7 +17,12 @@
 <div id="contact_list_panel" class="friend_list" style="display: none">
     {% for contact_obj in user_contacts %}
 	    <div id="bulletin_contact" class="bulletin_contacts contact_placeholder">
-            <img class="bulletin_contact_avatar" src="{% static 'img/avatar_default.png' %}"/> {{ contact_obj.contact_displayname }}
+            {% if not contact_obj.avatar %}
+				<img class="avatar_img" src="http://api.adorable.io/avatar/50/{{ contact_obj.contact_username }}"/>
+			{% else %}
+				<img class="avatar_img" src={{ contact_obj.avatar }}/>
+			{% endif %}
+	        {{ contact_obj.contact_remarkname }}
         </div>
     {% endfor %}
 </div>

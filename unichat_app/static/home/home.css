@@ -79,6 +79,16 @@
     right: 0;
     margin: 10px;
 }
+#login_info_placeholder {
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+#login_info_username_placeholder {
+    margin-top: 10px;
+    margin-left: 10px;
+    display: inline-block;
+}
 #log_out_btn {
     background-color: rgb(230, 30, 30);
     border: none;
@@ -126,6 +136,7 @@
 }
 .avatar_img {
     border-radius: 5px;
+    margin-right: 10px;
 }
 .left_btn_img {
     width: 50px;

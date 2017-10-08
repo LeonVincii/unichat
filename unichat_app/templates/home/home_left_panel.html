@@ -1,8 +1,6 @@
 {% load staticfiles %}
 
 <div id="user_avatar_placeholder" class="avatar_placeholder">
-{#    <p>{{ username }}</p>#}
-{#	<img src="{% static 'img/avatar_default.png' %}"/>#}
 	{% if not avatar %}
 		<img class="avatar_img" src="http://api.adorable.io/avatar/50/{{ username }}"/>
 	{% else %}
