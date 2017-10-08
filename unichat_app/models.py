@@ -73,16 +73,21 @@ class Contact(models.Model):
 		if Contact.objects.filter(user = self.user, contact_user = self.contact_user):
 			raise ValidationError('%(me)s has already added %(user)s', params = {'me': self.user.username, 'user': self.contact_user.username})
 
+
 class ChatList(models.Model):
 	user = models.ForeignKey(User, related_name = 'chat_myself')
 	chat_user = models.ForeignKey(User, related_name = 'chat_user')
+	chat_remarkname = models.CharField(max_length = 50, null = True, blank = True)
 
 	def __str__(self):
 		return self.user.username + ' :-> ' + self.chat_user.username
 
 	def clean(self):
-		chat_user = Contact.objects.filter(user = self.user, contact_user = self.chat_user)
-		if not chat_user:
-			raise ValidationError('%(user)s isn\'t your contact', params = {'user': self.chat_user.username})
 		if self.user == self.chat_user:
 			raise ValidationError('Chatting with self is not recommended :D')
+		chat_user_qs = Contact.objects.filter(user = self.user, contact_user = self.chat_user)
+		if not chat_user_qs:
+			raise ValidationError('%(user)s isn\'t your contact', params = {'user': self.chat_user.username})
+		else:
+			chat_user = Contact.objects.get(user = self.user, contact_user = self.chat_user)
+			self.chat_remarkname = chat_user.contact_remarkname

@@ -15,6 +15,7 @@ class HomeView(LoginRequiredMixin, TemplateView):
 			'username': request.user.username,
 			'avatar': request.user.avatar,
 			'gender': request.user.gender,
+			'chat_list': ChatList.objects.filter(user = request.user),
 			'user_contacts': Contact.objects.filter(user = request.user),
 		})
 

@@ -10,17 +10,22 @@
 <div id="chat_list_panel" class="friend_list">
     {% for chat in chat_list %}
 	    <div id="bulletin_chat" class="bulletin_chats contact_placeholder">
-            <img class="bulletin_contact_avatar" src="{% static 'img/avatar_default.png' %}"/>  {{ chat }}
+            {% if not chat.chat_user.avatar %}
+				<img class="avatar_img" src="https://api.adorable.io/avatars/50/{{ chat.chat_user.username }}"/>
+			{% else %}
+				<img class="avatar_img" src={{ chat.chat_user.avatar }}/>
+			{% endif %}
+	        {{ chat.chat_remarkname }}
         </div>
     {% endfor %}
 </div>
 <div id="contact_list_panel" class="friend_list" style="display: none">
     {% for contact_obj in user_contacts %}
 	    <div id="bulletin_contact" class="bulletin_contacts contact_placeholder">
-            {% if not contact_obj.avatar %}
-				<img class="avatar_img" src="https://api.adorable.io/avatars/50/{{ contact_obj.contact_username }}"/>
+            {% if not contact_obj.contact_user.avatar %}
+				<img class="avatar_img" src="https://api.adorable.io/avatars/50/{{ contact_obj.contact_user.username }}"/>
 			{% else %}
-				<img class="avatar_img" src={{ contact_obj.avatar }}/>
+				<img class="avatar_img" src={{ contact_obj.contact_user.avatar }}/>
 			{% endif %}
 	        {{ contact_obj.contact_remarkname }}
         </div>
