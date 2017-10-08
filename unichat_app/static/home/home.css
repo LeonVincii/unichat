@@ -89,6 +89,17 @@
     margin-left: 10px;
     display: inline-block;
 }
+#start_chat_btn_placeholder {
+    padding: 10px;
+}
+#start_chat_btn {
+    border: none;
+    background-color: rgb(0, 198, 61);
+}
+#start_chat_btn:active {
+    border: none;
+    background-color: rgb(0, 178, 55);
+}
 #log_out_btn {
     background-color: rgb(230, 30, 30);
     border: none;

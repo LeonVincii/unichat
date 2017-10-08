@@ -100,3 +100,10 @@ $('#chat_list_panel').ready(function() {
         }
     });
 });
+
+var start_chat_btn = $('#start_chat_btn');
+$(start_chat_btn).ready(function() {
+    start_chat_btn.on('click', function() {
+        
+    })
+});
