@@ -58,26 +58,27 @@ class User(AbstractUser):
 
 
 class Contact(models.Model):
-	user = models.ForeignKey(User)
-	contact_username = models.CharField(max_length = 25, validators = [contact_username_validator])
+	user = models.ForeignKey(User, related_name = 'contact_myself')
+	contact_user = models.ForeignKey(User, related_name = 'contact_user')
 	contact_remarkname = models.CharField(max_length = 50, null = True, blank = True)
-	add_date = models.DateField(auto_now = True)
 
 	def __str__(self):
-		return self.user.username + ' +-> ' + self.contact_username
+		return self.user.username + ' +-> ' + self.contact_user.username
 
 	def clean(self):
 		if not self.contact_remarkname:
-			self.contact_remarkname = self.contact_username
+			self.contact_remarkname = self.contact_user.username
 
 class ChatList(models.Model):
-	user = models.ForeignKey(User)
-	chat_username = models.CharField(max_length = 25)
+	user = models.ForeignKey(User, related_name = 'chat_myself')
+	chat_user = models.ForeignKey(User, related_name = 'chat_user')
 
 	def __str__(self):
-		return self.user.username + ' :-> ' + self.chat_username
+		return self.user.username + ' :-> ' + self.chat_user.username
 
 	def clean(self):
-		chat_user = Contact.objects.filter(user = self.user, contact_username = self.chat_username)
+		chat_user = Contact.objects.filter(user = self.user, contact_username = self.chat_user.username)
 		if not chat_user:
-			raise ValidationError('%(user)s isn\'t your contact', params = {'user': self.chat_username})
+			raise ValidationError('%(user)s isn\'t your contact', params = {'user': self.chat_user.username})
+		if self.user == self.chat_user:
+			raise ValidationError('Chatting with yourself is not recommended :D')

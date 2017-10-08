@@ -20,13 +20,9 @@ class RegistrationForm(UserCreationForm):
 class ContactForm(forms.ModelForm):
 	class Meta:
 		model = Contact
-		fields = [
-			'contact_username'
-		]
+		fields = []
 
 class ChatListForm(forms.ModelForm):
 	class Meta:
 		model = ChatList
-		fields = [
-			'chat_username'
-		]
+		fields = []
