@@ -68,6 +68,10 @@ class Contact(models.Model):
 	def clean(self):
 		if not self.contact_remarkname:
 			self.contact_remarkname = self.contact_user.username
+		if self.user == self.contact_user:
+			raise ValidationError('Adding self is not recommended :D')
+		if Contact.objects.filter(user = self.user, contact_user = self.contact_user):
+			raise ValidationError('%(me)s has already added %(user)s', params = {'me': self.user.username, 'user': self.contact_user.username})
 
 class ChatList(models.Model):
 	user = models.ForeignKey(User, related_name = 'chat_myself')
@@ -81,4 +85,4 @@ class ChatList(models.Model):
 		if not chat_user:
 			raise ValidationError('%(user)s isn\'t your contact', params = {'user': self.chat_user.username})
 		if self.user == self.chat_user:
-			raise ValidationError('Chatting with yourself is not recommended :D')
+			raise ValidationError('Chatting with self is not recommended :D')
