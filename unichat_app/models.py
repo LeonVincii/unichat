@@ -81,7 +81,7 @@ class ChatList(models.Model):
 		return self.user.username + ' :-> ' + self.chat_user.username
 
 	def clean(self):
-		chat_user = Contact.objects.filter(user = self.user, contact_username = self.chat_user.username)
+		chat_user = Contact.objects.filter(user = self.user, contact_user = self.chat_user)
 		if not chat_user:
 			raise ValidationError('%(user)s isn\'t your contact', params = {'user': self.chat_user.username})
 		if self.user == self.chat_user:
