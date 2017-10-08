@@ -1,8 +1,13 @@
 {% load staticfiles %}
 
-<div class="avatar_placeholder">
+<div id="user_avatar_placeholder" class="avatar_placeholder">
 {#    <p>{{ username }}</p>#}
-	<img src="{% static 'img/avatar_default.png' %}"/>
+{#	<img src="{% static 'img/avatar_default.png' %}"/>#}
+	{% if not avatar %}
+		<img class="avatar_img" src="http://api.adorable.io/avatar/50/{{ username }}"/>
+	{% else %}
+		<img class="avatar_img" src={{ avatar }}/>
+	{% endif %}
 </div>
 <div id="chat_button_placeholder">
     <button id="chat_list_btn" class="btn btn-outline-primary btn-sm left_btn active">

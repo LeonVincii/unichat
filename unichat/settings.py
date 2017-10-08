@@ -129,5 +129,9 @@ STATIC_URL = '/static/'
 LOGIN_URL = '/login/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'web_chatter_app/static')
+    os.path.join(BASE_DIR, 'unichat_app/static')
 ]
+
+MEDIA_ROOT = os.path.join(STATICFILES_DIRS[0], 'media')
+
+MEDIA_URL = '/media/'

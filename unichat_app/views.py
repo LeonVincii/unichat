@@ -13,6 +13,8 @@ class HomeView(LoginRequiredMixin, TemplateView):
 	def get(self, request, *args, **kwargs):
 		return render(request, 'home/home.html', {
 			'username': request.user.username,
+			'avatar': request.user.avatar,
+			'gender': request.user.gender,
 			'user_contacts': Contact.objects.filter(user = request.user),
 		})
 

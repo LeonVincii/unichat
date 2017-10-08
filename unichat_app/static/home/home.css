@@ -4,6 +4,11 @@
     min-height: 513px;
     background-color: rgb(45, 50, 56);
 }
+#user_avatar_placeholder {
+    -webkit-box-shadow: 0 0 5px rgb(148, 219, 255);
+    -moz-box-shadow: 0 0 5px rgb(148, 219, 255);
+    box-shadow: 0 0 5px rgb(148, 219, 255);
+}
 #settings_button_placeholder {
     margin-bottom: 10px;
     position: absolute;
@@ -115,6 +120,12 @@
     width: 50px;
     margin: 10px;
     border-color: transparent;
+}
+.avatar_placeholder {
+    border-radius: 5px;
+}
+.avatar_img {
+    border-radius: 5px;
 }
 .left_btn_img {
     width: 50px;
