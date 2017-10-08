@@ -82,6 +82,7 @@ $('#chat_list_panel').ready(function() {
     defaultSelectedChat.css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
     defaultSelectedContact.css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
     $('#msg_display_name').text(defaultSelectedChat.text());
+    $('#contact_remarkname_placeholder').text(defaultSelectedContact.text());
 
     /* Changes the selected contact by clicking. */
     $('.contact_placeholder').on('click', function() {
@@ -94,6 +95,7 @@ $('#chat_list_panel').ready(function() {
             }
             else if ($(this).hasClass('bulletin_contacts')) {
                 $('.bulletin_contacts').not(this).css('backgroundColor', NORMAL_CONTACT_BACKGROUND_COLOR);
+                $('#contact_remarkname_placeholder').text($(this).text());
             }
         }
     });

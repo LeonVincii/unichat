@@ -18,7 +18,7 @@
     {% for contact_obj in user_contacts %}
 	    <div id="bulletin_contact" class="bulletin_contacts contact_placeholder">
             {% if not contact_obj.avatar %}
-				<img class="avatar_img" src="http://api.adorable.io/avatar/50/{{ contact_obj.contact_username }}"/>
+				<img class="avatar_img" src="https://api.adorable.io/avatars/50/{{ contact_obj.contact_username }}"/>
 			{% else %}
 				<img class="avatar_img" src={{ contact_obj.avatar }}/>
 			{% endif %}
