@@ -39,8 +39,8 @@ class User(AbstractUser):
 		('M', 'Male'),
 		('F', 'Female')
 	)
-	username = models.CharField(max_length = 50, unique = True)
-	display_name = models.CharField(max_length = 50, null = True, blank = True)
+	username = models.CharField(max_length = 25, unique = True)
+	display_name = models.CharField(max_length = 25, null = True, blank = True)
 	email = models.EmailField(max_length = 50, unique = True)
 	gender = models.CharField(max_length = 1, choices = GENDER, null = True, blank = True)
 	bios = models.CharField(max_length = 255, null = True, blank = True)
@@ -60,7 +60,7 @@ class User(AbstractUser):
 class Contact(models.Model):
 	user = models.ForeignKey(User, related_name = 'contact_myself')
 	contact_user = models.ForeignKey(User, related_name = 'contact_user')
-	contact_remarkname = models.CharField(max_length = 50, null = True, blank = True)
+	contact_remarkname = models.CharField(max_length = 25, null = True, blank = True)
 
 	def __str__(self):
 		return self.user.username + ' +-> ' + self.contact_user.username
@@ -88,3 +88,10 @@ class ChatList(models.Model):
 		if ChatList.objects.filter(user = self.user, chat_user = self.chat_user):
 			raise ValidationError('%(me)s has already had a chat with %(user)s',
 			                      params = {'me': self.user.username, 'user': self.chat_user.contact_user.username})
+
+
+class Message(models.Model):
+	sender = models.ForeignKey(User)
+	receiver = models.ForeignKey(ChatList)
+	content = models.CharField(max_length = 9999)
+	create_datetime = models.DateTimeField(auto_now = True)
