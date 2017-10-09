@@ -5,9 +5,10 @@ function ele(id) {
 function initMidPanel() {
     /* Sets contact friend list height. */
     $('.friend_list').css('height', ele('mid_col').offsetHeight - ele('search_panel').offsetHeight + 'px');
-    /* Sets search btn size. */
-    ele('search_btn').style.height = ele('search_input').offsetHeight + 'px';
-    ele('search_btn').style.width = ele('search_btn').offsetHeight + 'px';
+    /* Sets search and add btn size. */
+    var searchAddBtn = $('.search_add_btn');
+    searchAddBtn.css('height', ele('search_input').offsetHeight + 'px');
+    searchAddBtn.css('width', ele('search_input').offsetHeight + 'px');
 }
 
 
@@ -49,6 +50,7 @@ $('#left_col').ready(function() {
             $('.left_btn').not(this).removeClass('active');
             $('.right_col_content').hide();
             $('.friend_list').hide();
+            $('.search_add_placeholder').hide();
             switch (this.id) {
                 case 'chat_list_btn':
                     var chatListPanel = $('#chat_list_panel');
@@ -56,12 +58,15 @@ $('#left_col').ready(function() {
                     if (chatListPanel.children().length > 0) {
                         $('#right_col_chat').show();
                     }
+                    $('#search_btn_placeholder').show();
                     break;
                 case 'contact_list_btn':
                     $('#contact_list_panel').show();
                     $('#right_col_info').show();
+                    $('#add_btn_placeholder').show();
                     break;
                 case 'settings_btn':
+                    $('#mid_col').hide();
                     $('#right_col_settings').show();
             }
         }
