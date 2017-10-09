@@ -53,6 +53,7 @@ $('#left_col').ready(function() {
             $('.search_add_placeholder').hide();
             switch (this.id) {
                 case 'chat_list_btn':
+                    $('#mid_col').show();
                     var chatListPanel = $('#chat_list_panel');
                     chatListPanel.show();
                     if (chatListPanel.children().length > 0) {
@@ -61,6 +62,7 @@ $('#left_col').ready(function() {
                     $('#search_btn_placeholder').show();
                     break;
                 case 'contact_list_btn':
+                    $('#mid_col').show();
                     $('#contact_list_panel').show();
                     $('#right_col_info').show();
                     $('#add_btn_placeholder').show();
@@ -68,6 +70,7 @@ $('#left_col').ready(function() {
                 case 'settings_btn':
                     $('#mid_col').hide();
                     $('#right_col_settings').show();
+                    break;
             }
         }
     });
