@@ -24,19 +24,37 @@
 						{{ errors }}
 					{% endif %}
 				</div>
-				<form method="post" action="{% url 'register' %}"> {% csrf_token %}
+				<form id="register_form" method="post" action="{% url 'register' %}"> {% csrf_token %}
 					<table>
 					<tr>
 					    <td><div class="register_title">Username:</div><div class="required_filed_indicator">*</div></td>
-					    <td class="value_td"><input id="username_input" class="register_input" name="username" type="text" title="username" autocomplete="off" required></td>
+					    <td class="value_td">
+						    <input id="username_input" class="register_input" name="username" type="text" title="username" autocomplete="off" required>
+					    </td>
+						<td>
+							<div id="username_valid_indicator" class="register_validation_indicator"><img src="{% static 'img/valid.png' %}"></div>
+							<div id="username_invalid_indicator" class="register_validation_indicator"><img src="{% static 'img/invalid.png' %}"></div>
+						</td>
 					</tr>
 					<tr>
 					    <td><div class="register_title">Password:</div><div class="required_filed_indicator">*</div></td>
-					    <td class="value_td"><input class="register_input" name="password1" type="password" title="password" required></td>
+					    <td class="value_td">
+						    <input id="pswd_input" class="register_input" name="password1" type="password" title="password" required>
+					    </td>
+						<td>
+							<div id="pswd_valid_indicator" class="register_validation_indicator"><img src="{% static 'img/valid.png' %}"></div>
+							<div id="pswd_invalid_indicator" class="register_validation_indicator"><img src="{% static 'img/invalid.png' %}"></div>
+						</td>
 					</tr>
 					<tr>
 					    <td><div class="register_title">Confirm password:</div><div class="required_filed_indicator">*</div></td>
-					    <td class="value_td"><input class="register_input" name="password2" type="password" title="password" required></td>
+					    <td class="value_td">
+						    <input id="confirm_pswd_input_input" class="register_input" name="password2" type="password" title="password" required>
+					    </td>
+						<td>
+							<div id="confirm_pswd_valid_indicator" class="register_validation_indicator"><img src="{% static 'img/valid.png' %}"></div>
+							<div id="confirm_pswd_invalid_indicator" class="register_validation_indicator"><img src="{% static 'img/invalid.png' %}"></div>
+						</td>
 					</tr>
 					<tr>
 					    <td><div class="register_title">Gender:</div></td>
@@ -48,6 +66,10 @@
 					<tr>
 					    <td><div class="register_title">E-mail:</div><div class="required_filed_indicator">*</div></td>
 					    <td class="value_td"><input class="register_input" name="email" type="email" title="email" autocomplete="off" required></td>
+						<td>
+							<div id="email_valid_indicator" class="register_validation_indicator"><img src="{% static 'img/valid.png' %}"></div>
+							<div id="email_invalid_indicator" class="register_validation_indicator"><img src="{% static 'img/invalid.png' %}"></div>
+						</td>
 					</tr>
 					</table>
 					<div id="submit_btn_placeholder">

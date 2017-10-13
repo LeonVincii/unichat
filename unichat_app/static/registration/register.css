@@ -43,7 +43,15 @@
 .gender_input {
     margin-right: 10px;
 }
+.register_validation_indicator {
+    display: none;
+    margin-left: 10px;
+}
 
 td {
+    vertical-align: middle;
     padding-bottom: 10px;
+}
+img {
+    display: block;
 }
