@@ -1,4 +1,5 @@
 $('#register_form').ready(function() {
+    var NORMAL_BORDER_COLOR = $('.register_input').css('border-color');
     /* Validates the username. */
     $('#username_input').change(function() {
         var username = $(this).val();
@@ -29,6 +30,7 @@ $('#register_form').ready(function() {
                 else {
                     $('#username_valid_indicator').show();
                     $('#username_invalid_indicator').hide();
+                    $('#username_input').css('border-color', NORMAL_BORDER_COLOR);
                 }
             }
         });
@@ -51,6 +53,8 @@ $('#register_form').ready(function() {
             $('#confirm_pswd_valid_indicator').show();
             $('#pswd_invalid_indicator').hide();
             $('#confirm_pswd_invalid_indicator').hide();
+            pswd_input.css('border-color', NORMAL_BORDER_COLOR);
+            confirm_pswd_input_input.css('border-color', NORMAL_BORDER_COLOR);
         }
     })
 });
