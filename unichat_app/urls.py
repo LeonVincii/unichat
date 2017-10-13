@@ -7,4 +7,6 @@ urlpatterns = [
 	url(r'login/$', UserLoginView.as_view(), name = 'login'),
 	url(r'logout/$', UserLogoutView.as_view()),
 	url(r'register/$', UserRegisterView.as_view(), name = 'register'),
+
+	url(r'signup_username_validation/$', signup_username_validation),
 ]

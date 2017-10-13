@@ -51,9 +51,10 @@ $('#left_col').ready(function() {
             $('.right_col_content').hide();
             $('.friend_list').hide();
             $('.search_add_placeholder').hide();
+            var midCol = $('#mid_col');
             switch (this.id) {
                 case 'chat_list_btn':
-                    $('#mid_col').show();
+                    midCol.show();
                     var chatListPanel = $('#chat_list_panel');
                     chatListPanel.show();
                     if (chatListPanel.children().length > 0) {
@@ -62,13 +63,13 @@ $('#left_col').ready(function() {
                     $('#search_btn_placeholder').show();
                     break;
                 case 'contact_list_btn':
-                    $('#mid_col').show();
+                    midCol.show();
                     $('#contact_list_panel').show();
                     $('#right_col_info').show();
                     $('#add_btn_placeholder').show();
                     break;
                 case 'settings_btn':
-                    $('#mid_col').hide();
+                    midCol.hide();
                     $('#right_col_settings').show();
                     break;
             }
@@ -109,9 +110,15 @@ $('#chat_list_panel').ready(function() {
     });
 });
 
-var start_chat_btn = $('#start_chat_btn');
-$(start_chat_btn).ready(function() {
-    start_chat_btn.on('click', function() {
-        
-    })
-});
+// var start_chat_btn = $('#start_chat_btn');
+// $(start_chat_btn).ready(function() {
+//     start_chat_btn.on('click', function() {
+//         var addChatRequest = $.ajax({
+//             url: '',
+//             data: {
+//                 action: 'add chat',
+//                 username:
+//             }
+//         })
+//     })
+// });

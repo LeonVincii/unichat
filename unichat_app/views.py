@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import login, authenticate
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
@@ -46,3 +46,12 @@ class UserRegisterView(FormView):
 		if signup_form.errors:
 			errors = signup_form.errors
 			return render(request, 'registration/register.html', {'errors': errors})
+
+def signup_username_validation(request):
+	print(request)
+	username = request.POST.get('username')
+	print(username)
+	data = {
+		'has_taken': User.objects.filter(username__iexact = username).exists()
+	}
+	return JsonResponse(data)

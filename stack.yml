@@ -9,6 +9,7 @@ services:
       POSTGRES_DB: unichat_db
     # The port 8081 is where django application will interact with
     # /fmaps/settings.py for DATABASE configuration, the port is 8081
+    # sudo lsof -n -i:8080 | grep LISTEN
     ports:
       - 8081:5432
 
