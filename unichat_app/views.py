@@ -1,12 +1,14 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import login, authenticate
+from django.core import serializers
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 
 from .forms import *
+from .serializers import UserDetailSerializer
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
@@ -61,3 +63,9 @@ def signup_username_validation(request):
 			'email_has_taken': User.objects.filter(email__exact = email).exists()
 		}
 	return JsonResponse(data)
+
+def user_obj_json_view(request):
+	username = request.POST.get('username')
+	user_obj_json = UserDetailSerializer(User.objects.get(username = username)).data
+	print(user_obj_json)
+	return JsonResponse(user_obj_json)

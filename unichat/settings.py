@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'unichat_app'
+    'rest_framework',
+    'unichat_app',
 ]
 
 MIDDLEWARE = [

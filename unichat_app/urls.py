@@ -9,4 +9,5 @@ urlpatterns = [
 	url(r'register/$', UserRegisterView.as_view(), name = 'register'),
 
 	url(r'ajax_signup_validation/$', signup_username_validation),
+	url(r'ajax_user_detail/$', user_obj_json_view),
 ]

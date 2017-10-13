@@ -33,6 +33,36 @@ function initRightPanel() {
     }
 }
 
+function requestUserModel(username) {
+    var csrfToken = Cookies.get('csrftoken');
+
+    function csrfSafeMethod(method) {
+        /* These HTTP methods do not require CSRF protection. */
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain)
+                xhr.setRequestHeader("X-CSRFToken", csrfToken);
+        }
+    });
+    $.ajax({
+        type: 'POST',
+        url: '/ajax_user_detail/',
+        data: {
+            'username': username
+        },
+        dataType: 'json',
+        success: fillRightPanel
+    });
+}
+
+function fillRightPanel(userObj) {
+    /* Fills the user detail page using the user json obj from server. */
+
+}
+
 $(window).resize(function() {
         /* Reset the height of ContactListPanel whenever the view port is resized. */
         ele('contact_list_panel').style.height = ele('mid_col').offsetHeight - ele('search_panel').offsetHeight + 'px';
@@ -104,7 +134,9 @@ $('#chat_list_panel').ready(function() {
             }
             else if ($(this).hasClass('bulletin_contacts')) {
                 $('.bulletin_contacts').not(this).css('backgroundColor', NORMAL_CONTACT_BACKGROUND_COLOR);
+                var contact_username = $(this).find('.this_contact_placeholder').val();
                 $('#contact_remarkname_placeholder').text($(this).text());
+                requestUserModel(contact_username);
             }
         }
     });
