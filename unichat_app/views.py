@@ -1,11 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import login, authenticate
-from django.core import serializers
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
+from rest_framework import status
 
 from .forms import *
 from .serializers import UserDetailSerializer
@@ -18,7 +18,7 @@ class HomeView(LoginRequiredMixin, TemplateView):
 			'avatar': request.user.avatar,
 			'gender': request.user.gender,
 			'chat_list': ChatList.objects.filter(user = request.user),
-			'user_contacts': Contact.objects.filter(user = request.user),
+			'user_contacts': Contact.objects.filter(user = request.user).order_by('contact_remarkname'),
 		})
 
 
@@ -49,6 +49,7 @@ class UserRegisterView(FormView):
 			errors = signup_form.errors
 			return render(request, 'registration/register.html', {'errors': errors})
 
+
 def signup_username_validation(request):
 	field = request.POST.get('field')
 	data = {}
@@ -64,8 +65,19 @@ def signup_username_validation(request):
 		}
 	return JsonResponse(data)
 
+
 def user_obj_json_view(request):
 	username = request.POST.get('username')
 	user_obj_json = UserDetailSerializer(User.objects.get(username = username)).data
-	print(user_obj_json)
 	return JsonResponse(user_obj_json)
+
+def add_chat_view(request, **kwargs):
+	myself = request.user
+	username = kwargs.get('username')
+	chat_user = Contact.objects.get(user = myself, contact_user = User.objects.get(username = username))
+	ChatList.objects.create(
+		user = myself,
+		chat_user = chat_user
+	)
+	return HttpResponse({}, status = status.HTTP_201_CREATED)
+

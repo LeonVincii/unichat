@@ -39,7 +39,7 @@ class User(AbstractUser):
 		('M', 'Male'),
 		('F', 'Female')
 	)
-	username = models.CharField(max_length = 25, unique = True)
+	username = models.CharField(max_length = 25, unique = True, validators = [signup_username_validator])
 	display_name = models.CharField(max_length = 25, null = True, blank = True)
 	email = models.EmailField(max_length = 50, unique = True)
 	gender = models.CharField(max_length = 1, choices = GENDER, null = True, blank = True)

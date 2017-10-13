@@ -2,6 +2,22 @@ function ele(id) {
     return document.getElementById(id);
 }
 
+function setupAjaxCsrf() {
+    var csrfToken = Cookies.get('csrftoken');
+
+    function csrfSafeMethod(method) {
+        /* These HTTP methods do not require CSRF protection. */
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain)
+                xhr.setRequestHeader("X-CSRFToken", csrfToken);
+        }
+    });
+}
+
 function initMidPanel() {
     /* Sets contact friend list height. */
     $('.friend_list').css('height', ele('mid_col').offsetHeight - ele('search_panel').offsetHeight + 'px');
@@ -34,19 +50,6 @@ function initRightPanel() {
 }
 
 function requestUserModel(username) {
-    var csrfToken = Cookies.get('csrftoken');
-
-    function csrfSafeMethod(method) {
-        /* These HTTP methods do not require CSRF protection. */
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    }
-
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && !this.crossDomain)
-                xhr.setRequestHeader("X-CSRFToken", csrfToken);
-        }
-    });
     $.ajax({
         type: 'POST',
         url: '/ajax_user_detail/',
@@ -62,6 +65,20 @@ function fillRightPanel(userObj) {
     /* Fills the user detail page using the user json obj from server. */
 
 }
+
+function onStartChat(contact_username) {
+    $.ajax({
+        type: 'POST',
+        url: '/ajax_add_chat/' + contact_username + '/',
+        success: function() {
+            $('#chat_list_btn').click();
+        }
+    });
+}
+
+$(function() {
+    setupAjaxCsrf();
+});
 
 $(window).resize(function() {
         /* Reset the height of ContactListPanel whenever the view port is resized. */
@@ -123,34 +140,35 @@ $('#chat_list_panel').ready(function() {
     $('#msg_display_name').text(defaultSelectedChat.text());
     $('#contact_remarkname_placeholder').text(defaultSelectedContact.text());
 
+    var selected_contact_username;
     /* Changes the selected contact by clicking. */
     $('.contact_placeholder').on('click', function() {
         if (this.style.backgroundColor != CLICKED_CONTACT_BACKGROUND_COLOR) {
             this.style.backgroundColor = CLICKED_CONTACT_BACKGROUND_COLOR;
             if ($(this).hasClass('bulletin_chats')) {
                 $('.bulletin_chats').not(this).css('backgroundColor', NORMAL_CONTACT_BACKGROUND_COLOR);
-                /* Sets the chat title to be the contact's display name. */
-                $('#msg_display_name').text($(this).text());
+                /* Sets the chat title to be the contact's remark name. */
+                $('#msg_remark_name').text($(this).text());
             }
             else if ($(this).hasClass('bulletin_contacts')) {
                 $('.bulletin_contacts').not(this).css('backgroundColor', NORMAL_CONTACT_BACKGROUND_COLOR);
-                var contact_username = $(this).find('.this_contact_placeholder').val();
+                /* Gets the username of the selected contact */
+                selected_contact_username = $(this).find('.this_contact_placeholder').val();
                 $('#contact_remarkname_placeholder').text($(this).text());
-                requestUserModel(contact_username);
+                /* Requests the selected user model from server. */
+                requestUserModel(selected_contact_username);
             }
         }
     });
+
+    $('#right_col_info').ready(function() {
+        var start_chat_btn = $('#start_chat_btn');
+        $(start_chat_btn).ready(function() {
+            start_chat_btn.on('click', function() {
+                onStartChat(selected_contact_username);
+            });
+        });
+    });
+
 });
 
-// var start_chat_btn = $('#start_chat_btn');
-// $(start_chat_btn).ready(function() {
-//     start_chat_btn.on('click', function() {
-//         var addChatRequest = $.ajax({
-//             url: '',
-//             data: {
-//                 action: 'add chat',
-//                 username:
-//             }
-//         })
-//     })
-// });

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import User
+from .models import User, ChatList
 
 class UserDetailSerializer(serializers.ModelSerializer):
 	class Meta:
