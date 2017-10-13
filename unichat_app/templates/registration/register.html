@@ -49,7 +49,7 @@
 					<tr>
 					    <td><div class="register_title">Confirm password:</div><div class="required_filed_indicator">*</div></td>
 					    <td class="value_td">
-						    <input id="confirm_pswd_input_input" class="register_input" name="password2" type="password" title="password" required>
+						    <input id="confirm_pswd_input" class="register_input" name="password2" type="password" title="password" required>
 					    </td>
 						<td>
 							<div id="confirm_pswd_valid_indicator" class="register_validation_indicator"><img src="{% static 'img/valid.png' %}"></div>
@@ -65,7 +65,7 @@
 					</tr>
 					<tr>
 					    <td><div class="register_title">E-mail:</div><div class="required_filed_indicator">*</div></td>
-					    <td class="value_td"><input class="register_input" name="email" type="email" title="email" autocomplete="off" required></td>
+					    <td class="value_td"><input id="email_input" class="register_input" name="email" type="email" title="email" autocomplete="off" required></td>
 						<td>
 							<div id="email_valid_indicator" class="register_validation_indicator"><img src="{% static 'img/valid.png' %}"></div>
 							<div id="email_invalid_indicator" class="register_validation_indicator"><img src="{% static 'img/invalid.png' %}"></div>

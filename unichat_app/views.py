@@ -48,10 +48,16 @@ class UserRegisterView(FormView):
 			return render(request, 'registration/register.html', {'errors': errors})
 
 def signup_username_validation(request):
-	print(request)
-	username = request.POST.get('username')
-	print(username)
-	data = {
-		'has_taken': User.objects.filter(username__iexact = username).exists()
-	}
+	field = request.POST.get('field')
+	data = {}
+	if field == 'username':
+		username = request.POST.get('username')
+		data = {
+			'username_has_taken': User.objects.filter(username__iexact = username).exists()
+		}
+	elif field == 'email':
+		email = request.POST.get('email')
+		data = {
+			'email_has_taken': User.objects.filter(email__exact = email).exists()
+		}
 	return JsonResponse(data)

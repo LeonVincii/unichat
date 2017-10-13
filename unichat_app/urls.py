@@ -8,5 +8,5 @@ urlpatterns = [
 	url(r'logout/$', UserLogoutView.as_view()),
 	url(r'register/$', UserRegisterView.as_view(), name = 'register'),
 
-	url(r'signup_username_validation/$', signup_username_validation),
+	url(r'ajax_signup_validation/$', signup_username_validation),
 ]
