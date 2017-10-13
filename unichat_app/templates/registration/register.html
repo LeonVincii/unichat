@@ -72,8 +72,16 @@
 						</td>
 					</tr>
 					</table>
-					<div id="submit_btn_placeholder">
-						<input id="submit_btn" class="btn btn-primary" type="submit" value="Sign Up"/>
+					<div id="register_btn_row" class="row align-items-center no-gutters">
+						<div id="submit_btn_placeholder" class="col-auto">
+							<input id="submit_btn" class="btn btn-primary" type="submit" value="Sign Up"/>
+						</div>
+						<div class="col-auto" style="margin-left: 10px">
+							Already has an account?
+						</div>
+						<div class="col-auto" style="margin-left: 5px">
+							<a id="login_href" href="/login/?next=/">Log in</a>
+						</div>
 					</div>
 					<input type="hidden" name="next" value="{{ next }}"/>
 				</form>
