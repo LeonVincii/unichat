@@ -1,3 +1,6 @@
+var NORMAL_CONTACT_BACKGROUND_COLOR = 'rgb(249, 249, 249)';
+var CLICKED_CONTACT_BACKGROUND_COLOR = 'rgb(223, 223, 223)';
+
 function ele(id) {
     return document.getElementById(id);
 }
@@ -18,7 +21,57 @@ function setupAjaxCsrf() {
     });
 }
 
-$(function() {
+function requestUserModel(username) {
+    $.ajax({
+        type: 'POST',
+        url: '/ajax_user_detail/',
+        data: {
+            'username': username
+        },
+        dataType: 'json',
+        success: fillRightPanel
+    });
+}
+
+function requestAddingChat(selectedContactUsername) {
+    $.ajax({
+        type: 'POST',
+        url: '/ajax_add_chat/' + selectedContactUsername + '/',
+        success: function() {
+            requestContentForElement('#chat_list_panel', function() {
+                initRightPanel();
+                var msgRemarknamePlaceholder = $('#msg_remark_name');
+                var defaultSelectedChat = $('#bulletin_chat');
+                defaultSelectedChat.css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
+                msgRemarknamePlaceholder.text(defaultSelectedChat.text());
+            });
+            $('#chat_list_btn').click();
+        }
+    });
+}
+
+function requestContentForElement(elementID, callback) {
+    $.ajax({
+        type: 'GET',
+        url: location.href,
+        dataType: 'html',
+        success: function(data) {
+            page = $(data);
+            newContent = page.find(elementID).html();
+            $(elementID).html(newContent);
+            if (typeof callback === 'function')
+                callback();
+        }
+    });
+}
+
+function fillRightPanel(userObj) {
+    /* Fills the user detail page using the user json obj from server. */
+    $('#contact_username_placeholder').text(userObj['username']);
+    $('#contact_email_placeholder').text(userObj['email']);
+}
+
+$(document).ready(function() {
     setupAjaxCsrf();
 });
 
@@ -33,7 +86,7 @@ $('#left_col').ready(function() {
     /* Left button controller.
      * Makes sure that there is always one and only one option selected in the left panel;
      * Also switches the right panel according to the selected option. */
-    $('.left_btn').click(function() {
+    $(document).on('click', '.left_btn', function() {
         if (!this.classList.contains('active')) {
             $(this).addClass('active');
             $('.left_btn').not(this).removeClass('active');
@@ -81,21 +134,29 @@ function initMidPanel() {
     });
 }
 
-function setupMidPanelClickEvents() {
-    var NORMAL_CONTACT_BACKGROUND_COLOR = 'rgb(249, 249, 249)';
-    var CLICKED_CONTACT_BACKGROUND_COLOR = 'rgb(223, 223, 223)';
-
+function setDefaultSelection() {
     /* When the list is initialized, the first one in the list is selected by default. */
-    var defaultSelectedChat = $('#bulletin_chat');
-    var defaultSelectedContact = $('#bulletin_contact');
-    defaultSelectedChat.css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
-    defaultSelectedContact.css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
-    $('#msg_remark_name').text(defaultSelectedChat.text());
-    $('#contact_remarkname_placeholder').text(defaultSelectedContact.text());
+    var msgRemarknamePlaceholder = $('#msg_remark_name');
+    var contactRemarknamePlaceholder = $('#contact_remarkname_placeholder');
+    if (msgRemarknamePlaceholder.text() == '') {
+        var defaultSelectedChat = $('#bulletin_chat');
+        defaultSelectedChat.css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
+        msgRemarknamePlaceholder.text(defaultSelectedChat.text());
+    }
+    if (contactRemarknamePlaceholder.text() == '') {
+        var defaultSelectedContact = $('#bulletin_contact');
+        defaultSelectedContact.css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
+        contactRemarknamePlaceholder.text(defaultSelectedContact.text());
+        var selectedContactUsername = defaultSelectedContact.find('.bulletin_contact_username').val();
+        requestUserModel(selectedContactUsername);
+    }
 
-    var selectedContactUsername = defaultSelectedContact.find('.bulletin_contact_username').val();
-    var contactUsernamePlaceholder = $('#contact_username_placeholder');
-    contactUsernamePlaceholder.text(selectedContactUsername);
+}
+
+function setupMidPanelClickEvents() {
+
+    setDefaultSelection();
+
     /* Changes the selected contact by clicking. */
     $(document).on('click', '.contact_placeholder', function() {
         if (this.style.backgroundColor != CLICKED_CONTACT_BACKGROUND_COLOR) {
@@ -109,7 +170,6 @@ function setupMidPanelClickEvents() {
                 $('.bulletin_contacts').not(this).css('backgroundColor', NORMAL_CONTACT_BACKGROUND_COLOR);
                 /* Gets the username of the selected contact */
                 selectedContactUsername = $(this).find('.bulletin_contact_username').val();
-                contactUsernamePlaceholder.text(selectedContactUsername);
                 $('#contact_remarkname_placeholder').text($(this).text());
                 requestUserModel(selectedContactUsername);
             }
@@ -145,41 +205,3 @@ $('#right_col_info').ready(function() {
         requestAddingChat($('#contact_username_placeholder').text());
     })
 });
-
-function requestUserModel(username) {
-    $.ajax({
-        type: 'POST',
-        url: '/ajax_user_detail/',
-        data: {
-            'username': username
-        },
-        dataType: 'json',
-        success: fillRightPanel
-    });
-}
-
-function requestAddingChat(selectedContactUsername) {
-    $.ajax({
-        type: 'POST',
-        url: '/ajax_add_chat/' + selectedContactUsername + '/',
-        success: function() {
-            $.ajax({
-                type: 'GET',
-                url: location.href,
-                success: function(data) {
-                    page = $(data);
-                    newChatList = page.find('#chat_list_panel').html();
-                    $('#chat_list_panel').html(newChatList);
-                }
-            });
-            // setupMidPanelClickEvents();
-            $('#chat_list_btn').click();
-            initRightPanel();
-        }
-    });
-}
-
-function fillRightPanel(userObj) {
-    /* Fills the user detail page using the user json obj from server. */
-    $('#contact_email_placeholder').text(userObj['email']);
-}

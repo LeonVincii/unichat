@@ -201,6 +201,7 @@
 
 /* right col */
 .info_cate {
+    color: dimgray;
     display: inline-block;
     margin-right: 5px;
 }

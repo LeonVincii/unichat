@@ -78,6 +78,7 @@ class Contact(models.Model):
 class ChatList(models.Model):
 	user = models.ForeignKey(User, related_name = 'chat_myself')
 	chat_user = models.ForeignKey(Contact, related_name = 'chat_user')
+	last_active_time = models.DateTimeField(auto_now_add = True)
 
 	def __str__(self):
 		return self.user.username + ' :-> ' + self.chat_user.contact_user.username

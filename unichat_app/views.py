@@ -3,6 +3,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
+from django.utils.timezone import now as current_time
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 from rest_framework import status
@@ -13,11 +14,12 @@ from .serializers import UserDetailSerializer
 
 class HomeView(LoginRequiredMixin, TemplateView):
 	def get(self, request, *args, **kwargs):
+		print('request received: ', request)
 		return render(request, 'home/home.html', {
 			'username': request.user.username,
 			'avatar': request.user.avatar,
 			'gender': request.user.gender,
-			'chat_list': ChatList.objects.filter(user = request.user),
+			'chat_list': ChatList.objects.filter(user = request.user).order_by('-last_active_time'),
 			'user_contacts': Contact.objects.filter(user = request.user).order_by('contact_remarkname'),
 		})
 
@@ -75,9 +77,14 @@ def add_chat_view(request, **kwargs):
 	myself = request.user
 	username = kwargs.get('username')
 	chat_user = Contact.objects.get(user = myself, contact_user = User.objects.get(username = username))
-	ChatList.objects.create(
-		user = myself,
-		chat_user = chat_user
-	)
+	if ChatList.objects.filter(user = myself, chat_user = chat_user).exists():
+		chat = ChatList.objects.get(user = myself, chat_user = chat_user)
+		chat.last_active_time = current_time()
+		chat.save()
+	else:
+		ChatList.objects.create(
+			user = myself,
+			chat_user = chat_user
+		)
 	return HttpResponse({}, status = status.HTTP_201_CREATED)
 

@@ -21,8 +21,3 @@ class ContactForm(forms.ModelForm):
 	class Meta:
 		model = Contact
 		fields = []
-
-class ChatListForm(forms.ModelForm):
-	class Meta:
-		model = ChatList
-		fields = []
