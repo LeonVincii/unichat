@@ -18,6 +18,7 @@
 <div id="chat_list_panel" class="friend_list">
     {% for chat in chat_list %}
 	    <div id="bulletin_chat" class="bulletin_chats contact_placeholder">
+	        <input class="bulletin_chat_username" type="hidden" value="{{ chat.chat_user.contact_user.username }}">
             {% if not chat.chat_user.contact_user.avatar %}
 				<img class="avatar_img" src="https://api.adorable.io/avatars/50/{{ chat.chat_user.contact_user.username }}"/>
 			{% else %}

@@ -44,6 +44,7 @@ function requestAddingChat(selectedContactUsername) {
                 var defaultSelectedChat = $('#bulletin_chat');
                 defaultSelectedChat.css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
                 msgRemarknamePlaceholder.text(defaultSelectedChat.text());
+                $('#chat_username_container').val(defaultSelectedChat.find('.bulletin_chat_username').val());
             });
             $('#chat_list_btn').click();
         }
@@ -165,11 +166,13 @@ function setupMidPanelClickEvents() {
                 $('.bulletin_chats').not(this).css('backgroundColor', NORMAL_CONTACT_BACKGROUND_COLOR);
                 /* Sets the chat title to be the contact's remark name. */
                 $('#msg_remark_name').text($(this).text());
+                var selectedChatUsername = $(this).find('.bulletin_chat_username').val();
+                $('#chat_username_container').val(selectedChatUsername);
             }
             else if ($(this).hasClass('bulletin_contacts')) {
                 $('.bulletin_contacts').not(this).css('backgroundColor', NORMAL_CONTACT_BACKGROUND_COLOR);
                 /* Gets the username of the selected contact */
-                selectedContactUsername = $(this).find('.bulletin_contact_username').val();
+                var selectedContactUsername = $(this).find('.bulletin_contact_username').val();
                 $('#contact_remarkname_placeholder').text($(this).text());
                 requestUserModel(selectedContactUsername);
             }
