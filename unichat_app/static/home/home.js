@@ -237,6 +237,8 @@ function initRightPanel() {
         /* Sets the height of msg display window. */
         ele('msg_display_window').style.height = $(window).height() - ele('msg_typing_window').offsetHeight - ele('msg_display_header').offsetHeight + 'px';
     }
+    else
+        $('#right_col_chat').hide();
 }
 
 $('#right_col_info').ready(function() {
