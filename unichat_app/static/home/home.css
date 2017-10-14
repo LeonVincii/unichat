@@ -16,10 +16,10 @@
 }
 
 /* mid col */
-#mid_col {;
+#mid_col {
     height: 100vh;
+    width: 205px;
     min-height: 513px;
-    max-width: 223px;
     background-color: rgb(249, 249, 249);
     border-right: thin solid rgb(226, 226, 226);
 }
@@ -187,9 +187,18 @@
 }
 .contact_placeholder {
     padding: 10px;
-    display: flex;
+    display: block;
     border-bottom: thin solid rgb(236, 236, 236);
-    align-content: flex-start;
+}
+.bulletin_name_col {
+    display: table-cell;
+    vertical-align: top;
+}
+.delete_chat_btn {
+    display: none;
+}
+.bulletin_chats:hover .delete_chat_btn {
+    display: block;
 }
 .bulletin_contact_avatar {
     padding-right: 10px;
@@ -204,4 +213,8 @@
     color: dimgray;
     display: inline-block;
     margin-right: 5px;
+}
+
+img {
+    display: block;
 }

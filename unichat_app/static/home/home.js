@@ -130,7 +130,14 @@ function initMidPanel() {
     searchAddBtn.css('height', ele('search_input').offsetHeight + 'px');
     searchAddBtn.css('width', ele('search_input').offsetHeight + 'px');
 
-    $('#mid_col').ready(function() {
+    /* Sets the width of name col of bulletin chat. */
+    var bulletinChatAvatarCol = $('.bulletin_chat_avatar_col');
+    var bulletinChatNameCol = $('.bulletin_name_col');
+    var bulletinChatDeleteCol = $('.bulletin_chat_delete_col');
+    var midCol = $('#mid_col');
+    bulletinChatNameCol.css('width', midCol.width() - bulletinChatAvatarCol.outerWidth()
+                                                    - bulletinChatDeleteCol.outerWidth() - 20 /* left and right padding */ + 'px');
+    midCol.ready(function() {
         setupMidPanelClickEvents();
     });
 }

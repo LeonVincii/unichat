@@ -18,26 +18,47 @@
 <div id="chat_list_panel" class="friend_list">
     {% for chat in chat_list %}
 	    <div id="bulletin_chat" class="bulletin_chats contact_placeholder">
-	        <input class="bulletin_chat_username" type="hidden" value="{{ chat.chat_user.contact_user.username }}">
-            {% if not chat.chat_user.contact_user.avatar %}
-				<img class="avatar_img" src="https://api.adorable.io/avatars/50/{{ chat.chat_user.contact_user.username }}"/>
-			{% else %}
-				<img class="avatar_img" src={{ chat.chat_user.contact_user.avatar }}/>
-			{% endif %}
-	        {{ chat.chat_user.contact_remarkname }}
+	        <table>
+		        <tr>
+			        <td class="bulletin_chat_col bulletin_chat_avatar_col">
+				        <input class="bulletin_chat_username" type="hidden" value="{{ chat.chat_user.contact_user.username }}">
+			            {% if not chat.chat_user.contact_user.avatar %}
+							<img class="avatar_img" src="https://api.adorable.io/avatars/50/{{ chat.chat_user.contact_user.username }}"/>
+						{% else %}
+							<img class="avatar_img" src={{ chat.chat_user.contact_user.avatar }}/>
+						{% endif %}
+			        </td>
+		            <td id="bulletin_chat_remarkname_placeholder" class="bulletin_chat_col bulletin_name_col">
+			            {{ chat.chat_user.contact_remarkname }}
+		            </td>
+		            <td class="bulletin_chat_col bulletin_chat_delete_col">
+			            <button class="btn btn-outline-secondary delete_chat_btn">
+				            <img src="{% static 'img/close.png' %}">
+			            </button>
+		            </td>
+		        </tr>
+	        </table>
         </div>
     {% endfor %}
 </div>
 <div id="contact_list_panel" class="friend_list" style="display: none">
     {% for contact_obj in user_contacts %}
 	    <div id="bulletin_contact" class="bulletin_contacts contact_placeholder">
+	        <table>
+		        <tr>
+			        <td>
+				        {% if not contact_obj.contact_user.avatar %}
+							<img class="avatar_img" src="https://api.adorable.io/avatars/50/{{ contact_obj.contact_user.username }}"/>
+						{% else %}
+							<img class="avatar_img" src={{ contact_obj.contact_user.avatar }}/>
+						{% endif %}
+			        </td>
+		            <td class="bulletin_name_col">
+			            {{ contact_obj.contact_remarkname }}
+		            </td>
+		        </tr>
+	        </table>
 	        <input class="bulletin_contact_username" type="hidden" value="{{ contact_obj.contact_user.username }}">
-            {% if not contact_obj.contact_user.avatar %}
-				<img class="avatar_img" src="https://api.adorable.io/avatars/50/{{ contact_obj.contact_user.username }}"/>
-			{% else %}
-				<img class="avatar_img" src={{ contact_obj.contact_user.avatar }}/>
-			{% endif %}
-	        {{ contact_obj.contact_remarkname }}
         </div>
     {% endfor %}
 </div>
