@@ -38,7 +38,27 @@ function requestAddingChat(selectedContactUsername) {
         type: 'POST',
         url: '/ajax_add_chat/' + selectedContactUsername + '/',
         success: function() {
-            requestContentForElement('#chat_list_panel', function() {
+                requestContentForElement('#chat_list_panel', function() {
+                initBulletinChatSize();
+                initRightPanel();
+                var msgRemarknamePlaceholder = $('#msg_remark_name');
+                var defaultSelectedChat = $('#bulletin_chat');
+                defaultSelectedChat.css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
+                msgRemarknamePlaceholder.text(defaultSelectedChat.text());
+                $('#chat_username_container').val(defaultSelectedChat.find('.bulletin_chat_username').val());
+            });
+            $('#chat_list_btn').click();
+        }
+    });
+}
+
+function requestDeletingChat(selectedContactUsername) {
+    $.ajax({
+        type: 'DELETE',
+        url: '/ajax_delete_chat/' + selectedContactUsername + '/',
+        success: function() {
+                requestContentForElement('#chat_list_panel', function() {
+                initBulletinChatSize();
                 initRightPanel();
                 var msgRemarknamePlaceholder = $('#msg_remark_name');
                 var defaultSelectedChat = $('#bulletin_chat');
@@ -122,6 +142,16 @@ $('#left_col').ready(function() {
     initMidPanel();
 });
 
+function initBulletinChatSize() {
+    /* Sets the width of name col of bulletin chat. */
+    var bulletinChatAvatarCol = $('.bulletin_chat_avatar_col');
+    var bulletinChatNameCol = $('.bulletin_name_col');
+    var bulletinChatDeleteCol = $('.bulletin_chat_delete_col');
+    var midCol = $('#mid_col');
+    bulletinChatNameCol.css('width', midCol.width() - bulletinChatAvatarCol.outerWidth()
+                                                    - bulletinChatDeleteCol.outerWidth() - 20 /* left and right padding */ + 'px');
+}
+
 function initMidPanel() {
     /* Sets contact friend list height. */
     $('.friend_list').css('height', ele('mid_col').offsetHeight - ele('search_panel').offsetHeight + 'px');
@@ -130,14 +160,9 @@ function initMidPanel() {
     searchAddBtn.css('height', ele('search_input').offsetHeight + 'px');
     searchAddBtn.css('width', ele('search_input').offsetHeight + 'px');
 
-    /* Sets the width of name col of bulletin chat. */
-    var bulletinChatAvatarCol = $('.bulletin_chat_avatar_col');
-    var bulletinChatNameCol = $('.bulletin_name_col');
-    var bulletinChatDeleteCol = $('.bulletin_chat_delete_col');
-    var midCol = $('#mid_col');
-    bulletinChatNameCol.css('width', midCol.width() - bulletinChatAvatarCol.outerWidth()
-                                                    - bulletinChatDeleteCol.outerWidth() - 20 /* left and right padding */ + 'px');
-    midCol.ready(function() {
+    initBulletinChatSize();
+
+    $('#mid_col').ready(function() {
         setupMidPanelClickEvents();
     });
 }
@@ -184,6 +209,10 @@ function setupMidPanelClickEvents() {
                 requestUserModel(selectedContactUsername);
             }
         }
+    });
+    $(document).on('click', '.delete_chat_btn', function() {
+        var selectedChatUsername = $(this).parent().parent().find('.bulletin_chat_username').val();
+        requestDeletingChat(selectedChatUsername);
     });
 
     initRightPanel();

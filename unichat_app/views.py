@@ -88,3 +88,11 @@ def add_chat_view(request, **kwargs):
 		)
 	return HttpResponse({}, status = status.HTTP_201_CREATED)
 
+def delete_chat_view(request, **kwargs):
+	myself = request.user
+	username = kwargs.get('username')
+	chat_user = Contact.objects.get(user = myself, contact_user = User.objects.get(username = username))
+	if ChatList.objects.filter(user = myself, chat_user = chat_user).exists():
+		chat = ChatList.objects.get(user = myself, chat_user = chat_user)
+		chat.delete()
+	return HttpResponse({}, status = status.HTTP_200_OK)
