@@ -30,7 +30,7 @@
 <div id="contact_list_panel" class="friend_list" style="display: none">
     {% for contact_obj in user_contacts %}
 	    <div id="bulletin_contact" class="bulletin_contacts contact_placeholder">
-	        <input class="this_contact_placeholder" type="hidden" value="{{ contact_obj.contact_user.username }}">
+	        <input class="bulletin_contact_username" type="hidden" value="{{ contact_obj.contact_user.username }}">
             {% if not contact_obj.contact_user.avatar %}
 				<img class="avatar_img" src="https://api.adorable.io/avatars/50/{{ contact_obj.contact_user.username }}"/>
 			{% else %}

@@ -93,8 +93,12 @@
     margin-left: 10px;
     display: inline-block;
 }
-#start_chat_btn_placeholder {
+#info_placeholder {
     padding: 10px;
+}
+#start_chat_btn_placeholder {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 #start_chat_btn {
     border: none;
@@ -196,3 +200,7 @@
 }
 
 /* right col */
+.info_cate {
+    display: inline-block;
+    margin-right: 5px;
+}
