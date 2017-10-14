@@ -10,6 +10,5 @@ urlpatterns = [
 
 	url(r'ajax_signup_validation/$', signup_username_validation),
 	url(r'ajax_user_detail/$', user_obj_json_view),
-	url(r'ajax_add_chat/(?P<username>[\w._-]+)/$', add_chat_view),
-	url(r'ajax_delete_chat/(?P<username>[\w._-]+)/$', delete_chat_view),
+	url(r'ajax_(add|delete)_chat/(?P<username>[\w._-]+)/$', add_delete_chat_view),
 ]
