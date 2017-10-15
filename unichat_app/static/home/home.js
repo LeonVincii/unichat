@@ -193,7 +193,6 @@ function selectContact(username) {
     }
     var contacts = $('.bulletin_contacts');
     for (var index = 0; index < contacts.length; index ++) {
-        console.log($(contacts[index]).find('.bulletin_contact_username').val());
         if ($(contacts[index]).find('.bulletin_contact_username').val() == username) {
             $(contacts[index]).css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
             requestUserModel(username);
