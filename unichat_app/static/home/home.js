@@ -101,6 +101,7 @@ function requestContentForElement(elementID, callback) {
 
 function fillRightPanel(userObj) {
     /* Fills the user detail page using the user json obj from server. */
+    $('#contact_displayname_placeholder').text(userObj['display_name']);
     $('#contact_username_placeholder').text(userObj['username']);
     $('#contact_email_placeholder').text(userObj['email']);
 }
@@ -137,15 +138,16 @@ $('#left_col').ready(function() {
                     midCol.show();
                     var chatListPanel = $('#chat_list_panel');
                     chatListPanel.show();
-                    if (chatListPanel.children().length > 0) {
+                    if (chatListPanel.children().length > 0)
                         $('#right_col_chat').show();
-                    }
                     $('#search_btn_placeholder').show();
                     break;
                 case 'contact_list_btn':
                     midCol.show();
-                    $('#contact_list_panel').show();
-                    $('#right_col_info').show();
+                    var contactListPanel = $('#contact_list_panel');
+                    contactListPanel.show();
+                    if (contactListPanel.children().length > 0)
+                        $('#right_col_info').show();
                     $('#add_btn_placeholder').show();
                     break;
                 case 'settings_btn':
@@ -194,9 +196,6 @@ function selectContact(username) {
         console.log($(contacts[index]).find('.bulletin_contact_username').val());
         if ($(contacts[index]).find('.bulletin_contact_username').val() == username) {
             $(contacts[index]).css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
-            var remarkname = $(contacts[index]).text();
-            $('#contact_remarkname_placeholder').text(remarkname);
-            $('#contact_remarkname').val($.trim(remarkname));
             requestUserModel(username);
         }
         else
@@ -284,6 +283,13 @@ function initRightPanel() {
     }
     else
         $('#right_col_chat').hide();
+
+    if ($('#contact_list_btn').hasClass('active') && $('#contact_list_panel').children().length > 0) {
+        /* If the chat list is not empty, the chat panel shows. */
+        $('#right_col_info').show();
+    }
+    else
+        $('#right_col_info').hide();
 }
 
 $('#right_col_info').ready(function() {
@@ -291,15 +297,19 @@ $('#right_col_info').ready(function() {
         var contactUsername = $.trim($('#contact_username_placeholder').text());
         requestAddingChat(contactUsername);
     });
+    /* Modify user remark name. */
+
     var remarkBefore;
     var contactRemarkInput = $('#contact_remarkname');
+
     contactRemarkInput.focusin(function() {
         remarkBefore = $.trim($(this).val());
     });
     contactRemarkInput.focusout(function() {
         if ($.trim($(this).val()) !== remarkBefore) {
             var contactUsername = $.trim($('#contact_username_placeholder').text());
-            requestModifyingRemark(contactUsername, $.trim($(this).val()));
+            var newRemarkname = ($.trim($(this).val()) == '' ? contactUsername : $.trim($(this).val()));
+            requestModifyingRemark(contactUsername, newRemarkname);
         }
         else
             $(this).val(remarkBefore);

@@ -70,7 +70,8 @@ def signup_username_validation(request):
 
 def user_obj_json_view(request):
 	username = request.POST.get('username')
-	user_obj_json = UserDetailSerializer(User.objects.get(username = username)).data
+	user_obj = User.objects.get(username = username)
+	user_obj_json = UserDetailSerializer(user_obj).data
 	return JsonResponse(user_obj_json)
 
 

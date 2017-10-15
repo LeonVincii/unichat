@@ -56,6 +56,10 @@ class User(AbstractUser):
 		if (not self.display_name) or self.display_name == '':
 			self.display_name = self.username
 
+	def save(self, *args, **kwargs):
+		super(User, self).save()
+		self.clean()
+
 
 class Contact(models.Model):
 	user = models.ForeignKey(User, related_name = 'contact_myself')
@@ -74,6 +78,11 @@ class Contact(models.Model):
 			if Contact.objects.get(user = self.user, contact_user = self.contact_user) != self:
 				raise ValidationError('%(me)s has already added %(user)s', params = {'me': self.user.username, 'user': self.contact_user.username})
 
+	def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+		super(Contact, self).save()
+		self.clean()
+
 
 class ChatList(models.Model):
 	user = models.ForeignKey(User, related_name = 'chat_myself')
@@ -90,6 +99,10 @@ class ChatList(models.Model):
 			raise ValidationError('%(me)s has already had a chat with %(user)s',
 			                      params = {'me': self.user.username, 'user': self.chat_user.contact_user.username})
 
+	def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+		super(ChatList, self).save()
+		self.clean()
 
 class Message(models.Model):
 	sender = models.ForeignKey(User)
