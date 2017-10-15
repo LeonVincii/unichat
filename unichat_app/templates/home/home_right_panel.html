@@ -1,5 +1,11 @@
 {% load staticfiles %}
 
+<div id="right_col_profile" class="right_col_content" style="display: none">
+	<div>
+		<div id="login_info_placeholder">You are logged in as:</div><div id="login_info_username_placeholder">{{ username }}</div>
+	</div>
+	<a id="log_out_btn" class="btn btn-primary" href="/logout">Log out</a>
+</div>
 <div id="right_col_chat" class="right_col_content" style="display: none">
 	<div>
 		<div id="msg_display_header" class="row no-gutters align-items-end justify-contents-between">
@@ -42,8 +48,5 @@
 	</div>
 </div>
 <div id="right_col_settings" class="right_col_content" style="display: none">
-	<div>
-		<div id="login_info_placeholder">You are logged in as:</div><div id="login_info_username_placeholder">{{ username }}</div>
-	</div>
-	<a id="log_out_btn" class="btn btn-primary" href="/logout">Log out</a>
+	<div style="margin-top: 10px;margin-left: 10px">Settings</div>
 </div>

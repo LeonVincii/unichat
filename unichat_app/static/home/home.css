@@ -9,6 +9,11 @@
     -moz-box-shadow: 0 0 5px rgb(148, 219, 255);
     box-shadow: 0 0 5px rgb(148, 219, 255);
 }
+#user_avatar_placeholder:hover {
+    -webkit-box-shadow: 0 0 10px rgb(100, 255, 255);
+    -moz-box-shadow: 0 0 10px rgb(100, 255, 255);
+    box-shadow: 0 0 10px rgb(100, 255, 255);
+}
 #settings_button_placeholder {
     margin-bottom: 10px;
     position: absolute;

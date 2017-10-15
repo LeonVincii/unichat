@@ -24,12 +24,12 @@ class HomeView(LoginRequiredMixin, TemplateView):
 		})
 
 
-# Override the django provided LoginView to prevent interference from user login and admin login.
+# Overrides the django provided LoginView to prevent interference from user login and admin login.
 class UserLoginView(LoginView):
 	next = '/'
 
 
-# Override the django provided LoginView to prevent interference from user logout and admin logout.
+# Overrides the django provided LoginView to prevent interference from user logout and admin logout.
 class UserLogoutView(LogoutView):
 	next_page = '/login/?next=/'
 
@@ -72,6 +72,7 @@ def user_obj_json_view(request):
 	username = request.POST.get('username')
 	user_obj_json = UserDetailSerializer(User.objects.get(username = username)).data
 	return JsonResponse(user_obj_json)
+
 
 def add_delete_chat_view(request, **kwargs):
 	myself = request.user

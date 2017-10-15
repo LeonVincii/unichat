@@ -116,6 +116,10 @@ $('#left_col').ready(function() {
             $('.search_add_placeholder').hide();
             var midCol = $('#mid_col');
             switch (this.id) {
+                case 'user_avatar_placeholder':
+                    midCol.hide();
+                    $('#right_col_profile').show();
+                    break;
                 case 'chat_list_btn':
                     midCol.show();
                     var chatListPanel = $('#chat_list_panel');
