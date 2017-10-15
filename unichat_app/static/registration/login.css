@@ -61,3 +61,9 @@
 .login_input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 0 white;
 }
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}

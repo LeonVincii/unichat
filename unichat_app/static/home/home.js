@@ -33,7 +33,7 @@ function requestUserModel(username) {
     });
 }
 
-function requestAddingChat(selectedContactUsername) {
+function requestToAddChat(selectedContactUsername) {
     $.ajax({
         type: 'POST',
         url: '/ajax_add_chat/' + selectedContactUsername + '/',
@@ -48,7 +48,7 @@ function requestAddingChat(selectedContactUsername) {
     });
 }
 
-function requestDeletingChat(selectedContactUsername) {
+function requestToDeleteChat(selectedContactUsername) {
     $.ajax({
         type: 'DELETE',
         url: '/ajax_delete_chat/' + selectedContactUsername + '/',
@@ -63,7 +63,7 @@ function requestDeletingChat(selectedContactUsername) {
     });
 }
 
-function requestModifyingRemark(contactUsername, newRemark) {
+function requestToModifyRemark(contactUsername, newRemark) {
     $.ajax({
         type: 'POST',
         url: '/ajax_alter_remarkname/' + contactUsername + '/',
@@ -259,7 +259,7 @@ function setupMidPanelClickEvents() {
     });
     $(document).on('click', '.delete_chat_btn', function() {
         var selectedChatUsername = $(this).parent().parent().find('.bulletin_chat_username').val();
-        requestDeletingChat(selectedChatUsername);
+        requestToDeleteChat(selectedChatUsername);
     });
 
     initRightPanel();
@@ -298,7 +298,7 @@ function initRightPanel() {
 $('#right_col_info').ready(function() {
     $('#start_chat_btn').click(function() {
         var contactUsername = $.trim($('#contact_username_placeholder').text());
-        requestAddingChat(contactUsername);
+        requestToAddChat(contactUsername);
     });
     /* Modify user remark name. */
 
@@ -312,7 +312,7 @@ $('#right_col_info').ready(function() {
         if ($.trim($(this).val()) !== remarkBefore) {
             var contactUsername = $.trim($('#contact_username_placeholder').text());
             var newRemarkname = ($.trim($(this).val()) == '' ? contactUsername : $.trim($(this).val()));
-            requestModifyingRemark(contactUsername, newRemarkname);
+            requestToModifyRemark(contactUsername, newRemarkname);
         }
         else
             $(this).val(remarkBefore);

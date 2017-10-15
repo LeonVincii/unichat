@@ -55,3 +55,9 @@ td {
 img {
     display: block;
 }
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
