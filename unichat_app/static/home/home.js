@@ -171,6 +171,24 @@ function initMidPanel() {
     });
 }
 
+function selectContact(username) {
+    var contactListBtn = $('#contact_list_btn');
+    if (!contactListBtn.hasClass('active')) {
+        contactListBtn.click();
+    }
+    var contacts = $('.bulletin_contacts');
+    for (var index = 0; index < contacts.length; index ++) {
+        console.log($(contacts[index]).find('.bulletin_contact_username').val());
+        if ($(contacts[index]).find('.bulletin_contact_username').val() == username) {
+            $(contacts[index]).css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
+            $('#contact_remarkname_placeholder').text($(contacts[index]).text());
+            requestUserModel(username);
+        }
+        else
+            $(contacts[index]).css('backgroundColor', NORMAL_CONTACT_BACKGROUND_COLOR);
+    }
+}
+
 function setDefaultSelection() {
     /* When the list is initialized, the first one in the list is selected by default. */
     var msgRemarknamePlaceholder = $('#msg_remark_name');
@@ -179,6 +197,7 @@ function setDefaultSelection() {
         var defaultSelectedChat = $('#bulletin_chat');
         defaultSelectedChat.css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
         msgRemarknamePlaceholder.text(defaultSelectedChat.text());
+        $('#chat_username_container').val(defaultSelectedChat.find('.bulletin_chat_username').val());
     }
     if (contactRemarknamePlaceholder.text() == '') {
         var defaultSelectedContact = $('#bulletin_contact');
@@ -249,4 +268,10 @@ $('#right_col_info').ready(function() {
     $('#start_chat_btn').click(function() {
         requestAddingChat($('#contact_username_placeholder').text());
     })
+});
+
+$('#right_col_chat').ready(function() {
+    $('#msg_contact_info').click(function() {
+        selectContact($('#chat_username_container').val());
+    });
 });
