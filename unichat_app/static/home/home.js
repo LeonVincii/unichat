@@ -84,6 +84,19 @@ function requestToModifyRemark(contactUsername, newRemark) {
     });
 }
 
+function requestToSendMessage(receiver, msg) {
+    $.ajax({
+        type: 'POST',
+        url: '/chat_session/' + receiver + '/',
+        data: {
+            'msg': msg
+        },
+        success: function() {
+            $('#msg_typing_input').val('');
+        }
+    })
+}
+
 function requestContentForElement(elementID, callback) {
     $.ajax({
         type: 'GET',
@@ -300,8 +313,8 @@ $('#right_col_info').ready(function() {
         var contactUsername = $.trim($('#contact_username_placeholder').text());
         requestToAddChat(contactUsername);
     });
+    
     /* Modify user remark name. */
-
     var remarkBefore;
     var contactRemarkInput = $('#contact_remarkname');
 
@@ -320,7 +333,30 @@ $('#right_col_info').ready(function() {
 });
 
 $('#right_col_chat').ready(function() {
+    var msgSendBtn = $('#msg_send_btn');
+    var msgTypingInput = $('#msg_typing_input');
+    msgSendBtn.prop('disabled', true);
     $('#msg_contact_info').click(function() {
         selectContact($('#chat_username_container').val());
     });
+    msgTypingInput.keyup(function() {
+        $('#msg_send_btn').prop('disabled', $.trim($('#msg_typing_input').val()) == '');
+    });
+    /* Sends the msg when "ENTER" is pressed.
+     * Starts a new line when "ENTER + SHIFT" is pressed. */
+    msgTypingInput.keydown(function(key) {
+        var msg = $('#msg_typing_input').val();
+        if (key.keyCode == 13 && !key.shiftKey) {
+            key.preventDefault();
+            if (!$('#msg_send_btn').prop('disabled'))
+                msgSendBtn.click();
+        }
+        else if (key.keyCode == 13 && key.shiftKey)
+            msg += '\n';
+    });
+    msgSendBtn.click(function() {
+        var chatUsername = $('#chat_username_container').val();
+        var msg = $('#msg_typing_input');
+        requestToSendMessage(chatUsername, $.trim(msg.val()));
+    })
 });

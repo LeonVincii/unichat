@@ -12,4 +12,5 @@ urlpatterns = [
 	url(r'ajax_user_detail/$', user_obj_json_view),
 	url(r'ajax_(add|delete)_chat/(?P<username>[\w._-]+)/$', add_delete_chat_view),
 	url(r'ajax_alter_remarkname/(?P<username>[\w._-]+)/$', alter_remark_view),
+	url(r'chat_session/(?P<username>[\w._-]+)/$', chat_view),
 ]

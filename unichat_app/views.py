@@ -107,3 +107,20 @@ def alter_remark_view(request, **kwargs):
 		contact_user.save()
 		return HttpResponse({}, status = status.HTTP_200_OK)
 	return HttpResponse({}, status = status.HTTP_404_NOT_FOUND)
+
+
+def chat_view(request, **kwargs):
+	myself = request.user
+	username = kwargs.get('username')
+	chat_user = Contact.objects.get(user = myself, contact_user = User.objects.get(username = username))
+	msg = request.POST.get('msg')
+	if request.method == 'POST':
+		chat = ChatList.objects.get(user = myself, chat_user = chat_user)
+		chat.last_active_time = current_time()
+		Message.objects.create(
+			sender = myself,
+			receiver = chat,
+			content = msg,
+			create_datetime = current_time()
+		)
+		return HttpResponse({}, status = status.HTTP_200_OK)
