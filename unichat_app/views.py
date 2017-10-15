@@ -94,3 +94,14 @@ def add_delete_chat_view(request, **kwargs):
 			chat = ChatList.objects.get(user = myself, chat_user = chat_user)
 			chat.delete()
 		return HttpResponse({}, status = status.HTTP_200_OK)
+	return HttpResponse({}, status = status.HTTP_404_NOT_FOUND)
+
+def alter_remark_view(request, **kwargs):
+	myself = request.user
+	username = kwargs.get('username')
+	if request.method == 'POST':
+		contact_user = Contact.objects.get(user = myself, contact_user = User.objects.get(username = username))
+		contact_user.contact_remarkname = request.POST.get('contact_remarkname')
+		contact_user.save()
+		return HttpResponse({}, status = status.HTTP_200_OK)
+	return HttpResponse({}, status = status.HTTP_404_NOT_FOUND)

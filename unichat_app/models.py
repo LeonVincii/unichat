@@ -67,7 +67,7 @@ class Contact(models.Model):
 
 	def clean(self):
 		if not self.contact_remarkname:
-			self.contact_remarkname = self.contact_user.username
+			self.contact_remarkname = self.contact_user.display_name
 		if self.user == self.contact_user:
 			raise ValidationError('Adding self is not recommended :D')
 		if Contact.objects.filter(user = self.user, contact_user = self.contact_user):

@@ -41,11 +41,7 @@ function requestAddingChat(selectedContactUsername) {
                 requestContentForElement('#chat_list_panel', function() {
                 initBulletinChatSize();
                 initRightPanel();
-                var msgRemarknamePlaceholder = $('#msg_remark_name');
-                var defaultSelectedChat = $('#bulletin_chat');
-                defaultSelectedChat.css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
-                msgRemarknamePlaceholder.text(defaultSelectedChat.text());
-                $('#chat_username_container').val(defaultSelectedChat.find('.bulletin_chat_username').val());
+                setDefaultChat();
             });
             $('#chat_list_btn').click();
         }
@@ -60,13 +56,30 @@ function requestDeletingChat(selectedContactUsername) {
             requestContentForElement('#chat_list_panel', function() {
                 initBulletinChatSize();
                 initRightPanel();
-                var msgRemarknamePlaceholder = $('#msg_remark_name');
-                var defaultSelectedChat = $('#bulletin_chat');
-                defaultSelectedChat.css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
-                msgRemarknamePlaceholder.text(defaultSelectedChat.text());
-                $('#chat_username_container').val(defaultSelectedChat.find('.bulletin_chat_username').val());
+                setDefaultChat();
             });
             $('#chat_list_btn').click();
+        }
+    });
+}
+
+function requestModifyingRemark(contactUsername, newRemark) {
+    $.ajax({
+        type: 'POST',
+        url: '/ajax_alter_remarkname/' + contactUsername + '/',
+        data: {
+            'contact_remarkname': newRemark
+        },
+        success: function() {
+            requestContentForElement('#contact_list_panel', function() {
+                initBulletinChatSize();
+                initRightPanel();
+                setDefaultChat();
+            });
+            requestContentForElement('#chat_list_panel', function() {
+                initRightPanel();
+                setDefaultContact();
+            });
         }
     });
 }
@@ -191,30 +204,35 @@ function selectContact(username) {
     }
 }
 
-function setDefaultSelection() {
+function setDefaultChat() {
     /* When the list is initialized, the first one in the list is selected by default. */
     var msgRemarknamePlaceholder = $('#msg_remark_name');
+    var defaultSelectedChat = $('#bulletin_chat');
+    defaultSelectedChat.css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
+    msgRemarknamePlaceholder.text(defaultSelectedChat.text());
+    $('#chat_username_container').val(defaultSelectedChat.find('.bulletin_chat_username').val());
+}
+
+function setDefaultContact() {
+    /* When the list is initialized, the first one in the list is selected by default. */
     var contactRemarknamePlaceholder = $('#contact_remarkname_placeholder');
-    if (msgRemarknamePlaceholder.text() == '') {
-        var defaultSelectedChat = $('#bulletin_chat');
-        defaultSelectedChat.css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
-        msgRemarknamePlaceholder.text(defaultSelectedChat.text());
-        $('#chat_username_container').val(defaultSelectedChat.find('.bulletin_chat_username').val());
-    }
-    if (contactRemarknamePlaceholder.text() == '') {
-        var defaultSelectedContact = $('#bulletin_contact');
-        defaultSelectedContact.css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
-        contactRemarknamePlaceholder.text(defaultSelectedContact.text());
-        $('#contact_remarkname').val($.trim(defaultSelectedContact.text()));
-        var selectedContactUsername = defaultSelectedContact.find('.bulletin_contact_username').val();
-        requestUserModel(selectedContactUsername);
-    }
+    var defaultSelectedContact = $('#bulletin_contact');
+    defaultSelectedContact.css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
+    contactRemarknamePlaceholder.text(defaultSelectedContact.text());
+    $('#contact_remarkname').val($.trim(defaultSelectedContact.text()));
+    var selectedContactUsername = defaultSelectedContact.find('.bulletin_contact_username').val();
+    requestUserModel(selectedContactUsername);
 
 }
 
 function setupMidPanelClickEvents() {
 
-    setDefaultSelection();
+    if ($('#msg_remark_name').text() == '') {
+        setDefaultChat();
+    }
+    if ($('#contact_remarkname_placeholder').text() == '') {
+        setDefaultContact();
+    }
 
     /* Changes the selected contact by clicking. */
     $(document).on('click', '.contact_placeholder', function() {
@@ -270,8 +288,13 @@ function initRightPanel() {
 
 $('#right_col_info').ready(function() {
     $('#start_chat_btn').click(function() {
-        requestAddingChat($('#contact_username_placeholder').text());
-    })
+        var contactUsername = $.trim($('#contact_username_placeholder').text());
+        requestAddingChat(contactUsername);
+    });
+    $('#contact_remarkname').focusout(function() {
+        var contactUsername = $.trim($('#contact_username_placeholder').text());
+        requestModifyingRemark(contactUsername, $(this).val());
+    });
 });
 
 $('#right_col_chat').ready(function() {
