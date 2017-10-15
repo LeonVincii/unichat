@@ -88,6 +88,18 @@
     border: none;
     background-color: rgb(0, 150, 30);
 }
+#contact_remarkname {
+    width: 150px;
+    min-width: 150px;
+    max-width: 300px;
+    transition: width 0.25s;
+    background-color: transparent;
+    border: thin solid transparent;
+}
+#contact_remarkname:hover,#contact_remarkname:focus {
+    border: thin solid rgb(204, 204, 204);
+    background-color: white;
+}
 #login_info_placeholder {
     display: inline-block;
     margin-top: 10px;
@@ -226,4 +238,10 @@ img {
     display: block;
     margin: 0;
     padding: 0;
+}
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
 }

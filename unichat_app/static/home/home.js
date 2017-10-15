@@ -57,7 +57,7 @@ function requestDeletingChat(selectedContactUsername) {
         type: 'DELETE',
         url: '/ajax_delete_chat/' + selectedContactUsername + '/',
         success: function() {
-                requestContentForElement('#chat_list_panel', function() {
+            requestContentForElement('#chat_list_panel', function() {
                 initBulletinChatSize();
                 initRightPanel();
                 var msgRemarknamePlaceholder = $('#msg_remark_name');
@@ -181,7 +181,9 @@ function selectContact(username) {
         console.log($(contacts[index]).find('.bulletin_contact_username').val());
         if ($(contacts[index]).find('.bulletin_contact_username').val() == username) {
             $(contacts[index]).css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
-            $('#contact_remarkname_placeholder').text($(contacts[index]).text());
+            var remarkname = $(contacts[index]).text();
+            $('#contact_remarkname_placeholder').text(remarkname);
+            $('#contact_remarkname').val($.trim(remarkname));
             requestUserModel(username);
         }
         else
@@ -203,6 +205,7 @@ function setDefaultSelection() {
         var defaultSelectedContact = $('#bulletin_contact');
         defaultSelectedContact.css('backgroundColor', CLICKED_CONTACT_BACKGROUND_COLOR);
         contactRemarknamePlaceholder.text(defaultSelectedContact.text());
+        $('#contact_remarkname').val($.trim(defaultSelectedContact.text()));
         var selectedContactUsername = defaultSelectedContact.find('.bulletin_contact_username').val();
         requestUserModel(selectedContactUsername);
     }
@@ -229,6 +232,7 @@ function setupMidPanelClickEvents() {
                 /* Gets the username of the selected contact */
                 var selectedContactUsername = $(this).find('.bulletin_contact_username').val();
                 $('#contact_remarkname_placeholder').text($(this).text());
+                $('#contact_remarkname').val($.trim($(this).text()));
                 requestUserModel(selectedContactUsername);
             }
         }
