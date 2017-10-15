@@ -53,7 +53,7 @@ class User(AbstractUser):
 		swappable = 'AUTH_USER_MODEL'
 
 	def clean(self):
-		if not self.display_name:
+		if (not self.display_name) or self.display_name == '':
 			self.display_name = self.username
 
 
@@ -66,7 +66,7 @@ class Contact(models.Model):
 		return self.user.username + ' +-> ' + self.contact_user.username
 
 	def clean(self):
-		if not self.contact_remarkname:
+		if (not self.contact_remarkname) or self.contact_remarkname == '':
 			self.contact_remarkname = self.contact_user.display_name
 		if self.user == self.contact_user:
 			raise ValidationError('Adding self is not recommended :D')

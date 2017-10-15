@@ -78,7 +78,7 @@ function requestModifyingRemark(contactUsername, newRemark) {
             });
             requestContentForElement('#chat_list_panel', function() {
                 initRightPanel();
-                setDefaultContact();
+                selectContact(contactUsername);
             });
         }
     });
@@ -291,8 +291,8 @@ $('#right_col_info').ready(function() {
         var contactUsername = $.trim($('#contact_username_placeholder').text());
         requestAddingChat(contactUsername);
     });
-    var contactRemarkInput = $('#contact_remarkname');
     var remarkBefore;
+    var contactRemarkInput = $('#contact_remarkname');
     contactRemarkInput.focusin(function() {
         remarkBefore = $.trim($(this).val());
     });
