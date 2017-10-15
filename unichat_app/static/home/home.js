@@ -291,9 +291,18 @@ $('#right_col_info').ready(function() {
         var contactUsername = $.trim($('#contact_username_placeholder').text());
         requestAddingChat(contactUsername);
     });
-    $('#contact_remarkname').focusout(function() {
-        var contactUsername = $.trim($('#contact_username_placeholder').text());
-        requestModifyingRemark(contactUsername, $(this).val());
+    var contactRemarkInput = $('#contact_remarkname');
+    var remarkBefore;
+    contactRemarkInput.focusin(function() {
+        remarkBefore = $.trim($(this).val());
+    });
+    contactRemarkInput.focusout(function() {
+        if ($.trim($(this).val()) !== remarkBefore) {
+            var contactUsername = $.trim($('#contact_username_placeholder').text());
+            requestModifyingRemark(contactUsername, $.trim($(this).val()));
+        }
+        else
+            $(this).val(remarkBefore);
     });
 });
 

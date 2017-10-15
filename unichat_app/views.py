@@ -96,6 +96,7 @@ def add_delete_chat_view(request, **kwargs):
 		return HttpResponse({}, status = status.HTTP_200_OK)
 	return HttpResponse({}, status = status.HTTP_404_NOT_FOUND)
 
+
 def alter_remark_view(request, **kwargs):
 	myself = request.user
 	username = kwargs.get('username')
