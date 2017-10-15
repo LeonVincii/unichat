@@ -93,6 +93,13 @@ function requestToSendMessage(receiver, msg) {
         },
         success: function() {
             $('#msg_typing_input').val('');
+            $('#msg_display_list').append(
+                '<li class="text-right list-group-item">'
+                + 
+                    '<div class="self_msg_box">' + msg + '</div>'
+                +
+                '</li>'
+            );
         }
     })
 }

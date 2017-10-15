@@ -58,6 +58,11 @@
 #msg_display_window {
     min-height: 300px;
     border-bottom: thin solid rgb(226, 226, 226);
+    overflow-y: auto;
+    padding: 10px;
+}
+#msg_display_list {
+    padding: 0;
 }
 #msg_typing_window {
     height: 20vh;
@@ -238,6 +243,16 @@
     color: dimgray;
     display: inline-block;
     margin-right: 5px;
+}
+.self_msg_box {
+    background-color: rgb(160, 231, 90);
+    border: thin solid transparent;
+    border-radius: 5px;
+    padding: 5px;
+    display: inline-block;
+    max-width: 150px;
+    word-wrap: break-word;
+    text-align: left;
 }
 
 img {
