@@ -127,7 +127,7 @@ $('#left_col').ready(function() {
             $('.left_btn').not(this).removeClass('active');
             $('.right_col_content').hide();
             $('.friend_list').hide();
-            $('.search_add_placeholder').hide();
+            $('.search_add_btn').hide();
             var midCol = $('#mid_col');
             switch (this.id) {
                 case 'user_avatar_placeholder':
@@ -140,7 +140,7 @@ $('#left_col').ready(function() {
                     chatListPanel.show();
                     if (chatListPanel.children().length > 0)
                         $('#right_col_chat').show();
-                    $('#search_btn_placeholder').show();
+                    $('#search_btn').show();
                     break;
                 case 'contact_list_btn':
                     midCol.show();
@@ -148,7 +148,7 @@ $('#left_col').ready(function() {
                     contactListPanel.show();
                     if (contactListPanel.children().length > 0)
                         $('#right_col_info').show();
-                    $('#add_btn_placeholder').show();
+                    $('#add_btn').show();
                     break;
                 case 'settings_btn':
                     midCol.hide();
@@ -172,16 +172,20 @@ function initBulletinChatSize() {
 }
 
 function initMidPanel() {
-    /* Sets contact friend list height. */
-    $('.friend_list').css('height', ele('mid_col').offsetHeight - ele('search_panel').offsetHeight + 'px');
+    var midCol = $('#mid_col');
     /* Sets search and add btn size. */
     var searchAddBtn = $('.search_add_btn');
     searchAddBtn.css('height', ele('search_input').offsetHeight + 'px');
     searchAddBtn.css('width', ele('search_input').offsetHeight + 'px');
+    /* Sets the width of search input. */
+    $('#search_input_col').css('width', $('#search_panel').width() - $('#search_btn_col').outerWidth());
+
+    /* Sets contact friend list height. */
+    $('.friend_list').css('height', ele('mid_col').offsetHeight - ele('search_panel').offsetHeight + 'px');
 
     initBulletinChatSize();
 
-    $('#mid_col').ready(function() {
+    midCol.ready(function() {
         setupMidPanelClickEvents();
     });
 }

@@ -1,19 +1,21 @@
 {% load staticfiles %}
 
 <div id="search_panel">
-	<div class="row no-gutters align-items-center">
-		<input id="search_input" class="col-auto" type="text" title=none>
-		<div id="search_btn_placeholder" class="col-auto search_add_placeholder">
-			<button id="search_btn" class="btn btn-outline-secondary search_add_btn">
-				<img class="search_add_btn_img" src="{% static 'img/search.png' %}"/>
-			</button>
-		</div>
-		<div id="add_btn_placeholder" class="col-auto search_add_placeholder" style="display: none">
-			<button id="add_btn" class="btn btn-outline-secondary search_add_btn">
-				<img class="search_add_btn_img" src="{% static 'img/add.png' %}"/>
-			</button>
-		</div>
-	</div>
+	<table>
+		<tr>
+			<td id="search_input_col">
+				<input id="search_input" class="col-auto" type="text" title=none>
+			</td>
+			<td id="search_btn_col">
+				<button id="search_btn" class="btn btn-outline-secondary search_add_btn">
+						<img class="search_add_btn_img" src="{% static 'img/search.png' %}"/>
+				</button>
+				<button id="add_btn" class="btn btn-outline-secondary search_add_btn" style="display: none">
+					<img class="search_add_btn_img" src="{% static 'img/add.png' %}"/>
+				</button>
+			</td>
+		</tr>
+	</table>
 </div>
 <div id="chat_list_panel" class="friend_list">
     {% for chat in chat_list %}
