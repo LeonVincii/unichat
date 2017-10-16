@@ -3,12 +3,12 @@
 		<li class="text-right list-group-item"> 
             <table class="msg_display_table">
                 <tr class="msg_display_row">
-                    <td class="msg_display_cell msg_avatar_cell other_avatar_cell"><div class="msg_avatar_placeholder"></div></td>
+                    <td class="msg_display_cell msg_avatar_cell other_avatar_cell"><div class="msg_avatar_container"></div></td>
                     <td class="msg_display_cell msg_cell">
 	                    <div class="msg_box self_msg_box">{{ msg.content }}</div>
                     </td>
                     <td class="msg_display_cell msg_avatar_cell self_avatar_cell">
-                        <div class="msg_avatar_placeholder">
+                        <div class="msg_avatar_container">
 	                        {% if not myself.avatar %}
 								<img class="msg_avatar_img" src="https://api.adorable.io/avatars/34/{{ myself.username }}"/>
 							{% else %}
@@ -24,7 +24,7 @@
             <table class="msg_display_table">
                 <tr class="msg_display_row">
                     <td class="msg_display_cell msg_avatar_cell other_avatar_cell">
-	                    <div class="msg_avatar_placeholder">
+	                    <div class="msg_avatar_container">
 		                    {% if not msg.receiver.chat_user.contact_user.avatar %}
 								<img class="msg_avatar_img" src="https://api.adorable.io/avatars/34/{{ msg.sender.username }}"/>
 							{% else %}
@@ -36,7 +36,7 @@
 	                    <div class="msg_box other_msg_box">{{ msg.content }}</div>
                     </td>
                     <td class="msg_display_cell msg_avatar_cell self_avatar_cell">
-                        <div class="msg_avatar_placeholder"></div>
+                        <div class="msg_avatar_container"></div>
                     </td>
                 </tr>
             </table>
@@ -45,7 +45,7 @@
 {% endfor %}
 <script type="text/javascript">
 	var msgAvatarCell = $('.msg_avatar_cell');
-    msgAvatarCell.css('width', $('.msg_avatar_placeholder').outerWidth() + 'px');
+    msgAvatarCell.css('width', $('.msg_avatar_container').outerWidth() + 'px');
     $('.msg_cell').css('maxWidth', $('#right_col').width() - 2*msgAvatarCell.outerWidth()
                                                            - 20 /* left and right padding */
                                                            - 2 /* leeway */+ 'px');

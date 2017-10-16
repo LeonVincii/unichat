@@ -1,0 +1,36 @@
+{% extends 'home/home_right_info.html' %}
+
+{% block info_avatar_cell %}
+	<div id="info_contact_avatar_container"></div>
+{% endblock %}
+
+{% block info_displayname_cell %}
+	<div id="contact_displayname_container"></div>
+{% endblock %}
+
+{% block info_bios_cell %}
+	<div id="contact_bios_container"></div>
+{% endblock %}
+
+{% block info_remarkname_cell %}
+	<input type="text" id="contact_remarkname" title="Change remark for this contact." data-autosize-input='{ "space": 20 }'>
+{% endblock %}
+
+{% block info_username_cell %}
+	<div id="contact_username_container"></div>
+{% endblock %}
+
+{% block info_email_cell %}
+	<div id="contact_email_container"></div>
+{% endblock %}
+
+{% block info_btn_cell %}
+	<div class="row no-gutters">
+		<div id="start_chat_btn_container" class="col-auto" style="margin-right: 10px">
+			<button id="start_chat_btn" class="btn btn-primary info_btn">Start Chat</button>
+		</div>
+		<div id="start_delete_contact_container" class="col-auto">
+			<button id="delete_contact_btn" class="btn btn-danger info_btn">Delete</button>
+		</div>
+	</div>
+{% endblock %}

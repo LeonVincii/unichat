@@ -1,0 +1,58 @@
+{% load staticfiles %}
+
+<div id="info_table_container">
+	<div class="info_div">
+		<table class="info_table">
+			<tr id="info_avatar&displayname_row">
+				<td>
+					<div id="info_avatar_cell" class="info_cell">
+						{% block info_avatar_cell %}{% endblock %}
+					</div>
+				</td>
+				<td class="info_cell">
+					<table>
+						<tr>
+							<td>
+								<div id="info_displayname_cell" class="info_cell">{% block info_displayname_cell %}{% endblock %}</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="info_bios_cell" class="info_cell">{% block info_bios_cell %}{% endblock %}</div>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="info_div" style="padding-top: 15px; border-top: thin solid rgb(226, 226, 226)">
+		<table class="info_table">
+			<tr id="info_otherinfo_row">
+				<td>
+					<table>
+						<tr id="info_remarkname_row">
+							<td><div class="info_labels info_cell">Remark</div></td>
+							<td><div id="info_remarkname_cell" class="info_cell">{% block info_remarkname_cell %}{% endblock %}</div></td>
+						</tr>
+						<tr id="info_username_row">
+							<td><div class="info_labels info_cell">User ID</div></td>
+							<td><div id="info_username_cell">{% block info_username_cell %}{% endblock %}</div></td>
+						</tr>
+						<tr id="info_email_row">
+							<td><div class="info_labels info_cell">E-mails</div></td>
+							<td><div id="info_email_cell" class="info_cell">{% block info_email_cell %}{% endblock %}</div></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="info_div">
+		<table class="info_table">
+			<tr id="info_btn_row">
+				<td><div id="info_btn_cell" class="info_cell">{% block info_btn_cell %}{% endblock %}</div></td>
+			</tr>
+		</table>
+	</div>
+</div>

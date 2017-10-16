@@ -2,7 +2,7 @@
 
 <div id="right_col_profile" class="right_col_content" style="display: none">
 	<div>
-		<div id="login_info_placeholder">You are logged in as:</div><div id="login_info_username_placeholder">{{ username }}</div>
+		<div id="login_info_container">You are logged in as:</div><div id="login_info_username_container">{{ username }}</div>
 	</div>
 	<a id="log_out_btn" class="btn btn-primary" href="/logout">Log out</a>
 </div>
@@ -11,7 +11,7 @@
 		<div id="msg_display_header" class="row no-gutters align-items-end justify-contents-between">
 			<input id="chat_username_container" type="hidden">
 			<div id="msg_remark_name" class="col-auto mr-auto align-self-center"></div>
-			<div id="msg_contact_info_placeholder" class="col-auto align-self-center">
+			<div id="msg_contact_info_container" class="col-auto align-self-center">
 				<button id="msg_contact_info" class="btn btn-sm btn-outline-secondary">
 					<img src="{% static 'img/contact_info.png' %}">
 				</button>
@@ -27,31 +27,13 @@
 		<div id="msg_typing_area">
 			<textarea id="msg_typing_input" title=none></textarea>
 		</div>
-		<div id="msg_send_btn_placeholder">
+		<div id="msg_send_btn_container">
 			<button id="msg_send_btn" class="btn btn-sm btn-primary">Send</button>
 		</div>
 	</div>
 </div>
 <div id="right_col_info" class="right_col_content" style="display: none">
-	<div id="info_placeholder">
-		<div class="row no-gutters align-items-center">
-			<div class="info_cate">Info page for:</div><div id="contact_displayname_placeholder"></div>
-		</div>
-		<div class="row no-gutters align-items-center">
-			<div class="info_cate">Remark:</div><input type="text" id="contact_remarkname" title="Change remark for this contact." data-autosize-input='{ "space": 20 }'>
-		</div>
-		<div class="row no-gutters align-items-center">
-			<div class="info_cate">Username:</div><div id="contact_username_placeholder"></div>
-		</div>
-		<div class="row no-gutters align-items-center">
-			<div class="info_cate">Email:</div><div id="contact_email_placeholder"></div>
-		</div>
-		<div class="row no-gutters align-items-center">
-			<div id="start_chat_btn_placeholder">
-				<button id="start_chat_btn" class="btn btn-primary">Start Chat</button>
-			</div>
-		</div>
-	</div>
+	{% include 'home/home_right_contact_info.html' %}
 </div>
 <div id="right_col_settings" class="right_col_content" style="display: none">
 	<div style="margin-top: 10px;margin-left: 10px">Settings</div>

@@ -1,23 +1,23 @@
 {% load staticfiles %}
 
-<div id="user_avatar_placeholder" class="avatar_placeholder left_btn">
+<div id="user_avatar_container" class="avatar_container left_btn">
 	{% if not avatar %}
 		<img class="avatar_img" src="https://api.adorable.io/avatars/50/{{ username }}"/>
 	{% else %}
 		<img class="avatar_img" src={{ avatar }}/>
 	{% endif %}
 </div>
-<div id="chat_button_placeholder">
+<div id="chat_button_container">
     <button id="chat_list_btn" class="btn btn-outline-primary btn-sm left_btn active">
 	    <img src="{% static 'img/chat.png' %}"/>
     </button>
 </div>
-<div id="contact_button_placeholder">
+<div id="contact_button_container">
     <button id="contact_list_btn" class="btn btn-outline-primary btn-sm left_btn">
         <img src="{% static 'img/contact.png' %}"/>
     </button>
 </div>
-<div id="settings_button_placeholder">
+<div id="settings_button_container">
 	<button id="settings_btn" class="btn btn-outline-primary btn-sm left_btn">
 		<img src="{% static 'img/settings.png' %}"/>
 	</button>

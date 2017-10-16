@@ -19,7 +19,7 @@
 </div>
 <div id="chat_list_panel" class="friend_list">
     {% for chat in chat_list %}
-	    <div id="bulletin_chat" class="bulletin_chats contact_placeholder">
+	    <div id="bulletin_chat" class="bulletin_chats contact_container">
 	        <table>
 		        <tr>
 			        <td class="bulletin_chat_col bulletin_chat_avatar_col">
@@ -30,7 +30,7 @@
 							<img class="avatar_img" src={{ chat.chat_user.contact_user.avatar }}/>
 						{% endif %}
 			        </td>
-		            <td id="bulletin_chat_remarkname_placeholder" class="bulletin_chat_col bulletin_name_col">
+		            <td id="bulletin_chat_remarkname_container" class="bulletin_chat_col bulletin_name_col">
 			            {{ chat.chat_user.contact_remarkname }}
 		            </td>
 		            <td class="bulletin_chat_col bulletin_chat_delete_col">
@@ -45,7 +45,7 @@
 </div>
 <div id="contact_list_panel" class="friend_list" style="display: none">
     {% for contact_obj in user_contacts %}
-	    <div id="bulletin_contact" class="bulletin_contacts contact_placeholder">
+	    <div id="bulletin_contact" class="bulletin_contacts contact_container">
 	        <table>
 		        <tr>
 			        <td>

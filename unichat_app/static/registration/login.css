@@ -1,19 +1,19 @@
 /* login */
-#login_placeholder {
+#login_container {
     display: inline-block;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     margin-top: 15vh;
 }
-#login_header_placeholder {
+#login_header_container {
     padding: 20px;
     color: white;
     margin: 0;
     background-color: rgb(45, 50, 56);
     border-radius: 5px 5px 0 0;
 }
-#login_form_placeholder {
+#login_form_container {
     background-color: white;
     border: thin solid rgb(226, 226, 226);
     border-radius: 0 0 5px 5px;
@@ -28,7 +28,7 @@
 #login_form {
     padding: 20px;
 }
-#login_error_msg_placeholder {
+#login_error_msg_container {
     width: 100%;
     padding-top: 20px;
     padding-left: 20px;

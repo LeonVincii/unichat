@@ -4,17 +4,17 @@
     min-height: 513px;
     background-color: rgb(45, 50, 56);
 }
-#user_avatar_placeholder {
+#user_avatar_container {
     -webkit-box-shadow: 0 0 5px rgb(148, 219, 255);
     -moz-box-shadow: 0 0 5px rgb(148, 219, 255);
     box-shadow: 0 0 5px rgb(148, 219, 255);
 }
-#user_avatar_placeholder:hover {
+#user_avatar_container:hover {
     -webkit-box-shadow: 0 0 10px rgb(100, 255, 255);
     -moz-box-shadow: 0 0 10px rgb(100, 255, 255);
     box-shadow: 0 0 10px rgb(100, 255, 255);
 }
-#settings_button_placeholder {
+#settings_button_container {
     margin-bottom: 10px;
     position: absolute;
     bottom: 0;
@@ -83,7 +83,7 @@
 #msg_typing_input:focus {
     outline: none;
 }
-#msg_send_btn_placeholder {
+#msg_send_btn_container {
     height: 50px;
 }
 #msg_send_btn {
@@ -112,22 +112,30 @@
     border-radius: 3px;
     background-color: white;
 }
-#login_info_placeholder {
+#login_info_container {
     display: inline-block;
     margin-top: 10px;
     margin-left: 10px;
 }
-#login_info_username_placeholder {
+#login_info_username_container {
     margin-top: 10px;
     margin-left: 10px;
     display: inline-block;
 }
-#info_placeholder {
+#info_container {
     padding: 10px;
 }
-#start_chat_btn_placeholder {
-    padding-top: 10px;
-    padding-bottom: 10px;
+#info_table_container {
+    margin: 20px;
+}
+#info_avatar_cell {
+    height: 100px;
+    width: 100px;
+}
+#info_avatar_img {
+    height: 100%;
+    width: 100%;
+    border-radius: 5%;
 }
 #start_chat_btn {
     border: none;
@@ -187,7 +195,7 @@
     padding: 9px;
     border: none;
 }
-.avatar_placeholder {
+.avatar_container {
     height: 50px;
     width: 50px;
     padding: 0;
@@ -216,7 +224,7 @@
 .search_add_btn_img {
     display: block;
 }
-.contact_placeholder {
+.contact_container {
     padding: 10px;
     display: block;
     border-bottom: thin solid rgb(236, 236, 236);
@@ -248,7 +256,7 @@
 .msg_display_table {
     width: 100%;
 }
-.msg_avatar_placeholder {
+.msg_avatar_container {
     height: 34px;
     width: 34px;
     padding: 0;
@@ -314,7 +322,22 @@
     background-color: transparent;
     padding: 0;
 }
-
+.info_div {
+    margin-bottom: 20px;
+}
+.info_cell {
+    vertical-align: top;
+    min-height: 25px;
+    margin-right: 20px;
+}
+.info_labels {
+    color: rgb(136, 136, 136);
+    text-align: right;
+}
+.info_btn {
+    height: 40px;
+    width: 100px;
+}
 img {
     display: block;
     margin: 0;
