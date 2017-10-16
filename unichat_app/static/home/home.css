@@ -264,18 +264,48 @@
 }
 .msg_box {
     border-radius: 5px;
-    padding: 5px;
-    max-width: 100%;
+    padding: 5px 10px;
+    max-width: 97%;
     display: inline-block;
     word-wrap: break-word;
     text-align: left;
     margin-top: 10px;
 }
 .self_msg_box {
+    position: relative;
     background-color: rgb(160, 231, 90);
+    margin-right: 5px;
+}
+.self_msg_box:after {
+    content: '';
+	position: absolute;
+	right: 0;
+	top: 1em;
+	width: 0;
+	height: 0;
+	border: .5em solid transparent;
+	border-left-color: rgb(160, 231, 90);
+	border-right: 0;
+	margin-top: -.5em;
+	margin-right: -.4em;
 }
 .other_msg_box {
+    position: relative;
     background-color: white;
+    margin-left: 5px;
+}
+.other_msg_box:before {
+    content: '';
+	position: absolute;
+	left: 0;
+	top: 1em;
+	width: 0;
+	height: 0;
+	border: .5em solid transparent;
+	border-right-color: white;
+	border-left: 0;
+	margin-top: -.5em;
+	margin-left: -.4em;
 }
 .list-group-item {
     border: none;

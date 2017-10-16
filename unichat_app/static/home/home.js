@@ -92,27 +92,11 @@ function requestToSendMessage(receiver, msg) {
             'msg': msg
         },
         success: function() {
-            // $('#msg_display_list').append(
-            //     '<li class="text-right list-group-item">' +
-            //         '<table class="msg_display_table">' +
-            //             '<tr class="msg_display_row">' +
-            //                 '<td class="msg_display_cell msg_avatar_cell other_avatar_cell"><div class="msg_avatar_placeholder"></div></td>' +
-            //                 '<td class="msg_display_cell msg_cell">' + '<div class="msg_box self_msg_box">'+msg+'</div>' + '</td>' +
-            //                 '<td class="msg_display_cell msg_avatar_cell self_avatar_cell">' +
-            //                     '<div class="msg_avatar_placeholder">' +
-            //                         '<img class=\"msg_avatar_img\" src=\"https://api.adorable.io/avatars/34/' +
-            //                                                             $.trim($('#login_info_username_placeholder').text()) + '\"/>' +
-            //                     '</div>' +
-            //                 '</td>' +
-            //             '</tr>' +
-            //         '</table>' +
-            //     '</li>'
-            // );
             var msgAvatarCell = $('.msg_avatar_cell');
             msgAvatarCell.css('width', $('.msg_avatar_placeholder').outerWidth() + 'px');
             $('.msg_cell').css('maxWidth', $('#right_col').width() - 2*msgAvatarCell.outerWidth()
                                                                    - 20 /* left and right padding */
-                                                                   - 2 /* leeway */+ 'px');
+                                                                   - 2  /* leeway */ + 'px');
             requestToReceiveMessageForUser(receiver);
             $('#msg_typing_input').val('');
         }

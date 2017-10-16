@@ -120,8 +120,6 @@ def chat_view(request, **kwargs):
 		                                      ).order_by('create_datetime')
 		msgs = list(msgs_send) + list(msgs_receive)
 		msgs_sorted = sorted(msgs, key = lambda x: x.create_datetime)
-		for msg in msgs_sorted:
-			print(msg.content)
 		return render(request, 'home/message_list.html', {
 			'myself': request.user,
 			'msgs': msgs_sorted,
