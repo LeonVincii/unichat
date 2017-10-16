@@ -263,9 +263,9 @@
     vertical-align: top;
 }
 .msg_box {
-    height: 2.2em;
     border-radius: 5px;
     padding: 5px 10px;
+    min-height: 2.2em;
     max-width: 97%;
     display: inline-block;
     word-wrap: break-word;
