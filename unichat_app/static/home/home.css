@@ -187,9 +187,15 @@
     border: none;
 }
 .avatar_placeholder {
+    height: 50px;
+    width: 50px;
+    padding: 0;
+    margin: 10px;
     border-radius: 5px;
 }
 .avatar_img {
+    height: 50px;
+    width: 50px;
     border-radius: 5px;
     margin-right: 10px;
 }
@@ -200,12 +206,6 @@
 .list {
     padding: 0;
     list-style-type: none;
-}
-.avatar_placeholder {
-    height: 50px;
-    width: 50px;
-    padding: 0;
-    margin: 10px;
 }
 
 /* mid col */
@@ -244,15 +244,43 @@
     display: inline-block;
     margin-right: 5px;
 }
-.self_msg_box {
-    background-color: rgb(160, 231, 90);
-    border: thin solid transparent;
+.msg_display_table {
+    width: 100%;
+}
+.msg_avatar_placeholder {
+    height: 34px;
+    width: 34px;
+    padding: 0;
+    margin: 10px;
+    border-radius: 3px;
+}
+.msg_avatar_img {
+    height: 34px;
+    width: 34px;
+    border-radius: 3px;
+}
+.msg_display_cell {
+    vertical-align: top;
+}
+.msg_box {
     border-radius: 5px;
     padding: 5px;
+    max-width: 100%;
     display: inline-block;
-    max-width: 150px;
     word-wrap: break-word;
     text-align: left;
+    margin-top: 10px;
+}
+.self_msg_box {
+    background-color: rgb(160, 231, 90);
+}
+.other_msg_box {
+    background-color: white;
+}
+.list-group-item {
+    border: none;
+    background-color: transparent;
+    padding: 0;
 }
 
 img {

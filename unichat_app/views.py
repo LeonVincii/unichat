@@ -9,7 +9,7 @@ from django.views.generic.edit import FormView
 from rest_framework import status
 
 from .forms import *
-from .serializers import UserDetailSerializer
+from .serializers import *
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
@@ -113,13 +113,27 @@ def chat_view(request, **kwargs):
 	myself = request.user
 	username = kwargs.get('username')
 	chat_user = Contact.objects.get(user = myself, contact_user = User.objects.get(username = username))
-	msg = request.POST.get('msg')
-	if request.method == 'POST':
+	if request.method == 'GET':
+		msgs_send = Message.objects.filter(sender = myself, receiver = chat_user).order_by('create_datetime')
+		msgs_receive = Message.objects.filter(sender = chat_user.contact_user,
+		                                      receiver = Contact.objects.get(user = chat_user.contact_user, contact_user = myself)
+		                                      ).order_by('create_datetime')
+		msgs = list(msgs_send) + list(msgs_receive)
+		msgs_sorted = sorted(msgs, key = lambda x: x.create_datetime)
+		for msg in msgs_sorted:
+			print(msg.content)
+		return render(request, 'home/message_list.html', {
+			'myself': request.user,
+			'msgs': msgs_sorted,
+		})
+
+	elif request.method == 'POST':
 		chat = ChatList.objects.get(user = myself, chat_user = chat_user)
+		msg = request.POST.get('msg')
 		chat.last_active_time = current_time()
 		Message.objects.create(
 			sender = myself,
-			receiver = chat,
+			receiver = chat_user,
 			content = msg,
 			create_datetime = current_time()
 		)

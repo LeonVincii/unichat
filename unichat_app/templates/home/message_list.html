@@ -1,0 +1,52 @@
+{% for msg in msgs %}
+	{% if msg.sender == myself %}
+		<li class="text-right list-group-item"> 
+            <table class="msg_display_table">
+                <tr class="msg_display_row">
+                    <td class="msg_display_cell msg_avatar_cell other_avatar_cell"><div class="msg_avatar_placeholder"></div></td>
+                    <td class="msg_display_cell msg_cell">
+	                    <div class="msg_box self_msg_box">{{ msg.content }}</div>
+                    </td>
+                    <td class="msg_display_cell msg_avatar_cell self_avatar_cell">
+                        <div class="msg_avatar_placeholder">
+	                        {% if not myself.avatar %}
+								<img class="msg_avatar_img" src="https://api.adorable.io/avatars/34/{{ myself.username }}"/>
+							{% else %}
+								<img class="msg_avatar_img" src={{ myself.avatar }}/>
+							{% endif %}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </li>
+	{% else %}
+		<li class="text-left list-group-item">
+            <table class="msg_display_table">
+                <tr class="msg_display_row">
+                    <td class="msg_display_cell msg_avatar_cell other_avatar_cell">
+	                    <div class="msg_avatar_placeholder">
+		                    {% if not msg.receiver.chat_user.contact_user.avatar %}
+								<img class="msg_avatar_img" src="https://api.adorable.io/avatars/34/{{ msg.sender.username }}"/>
+							{% else %}
+								<img class="msg_avatar_img" src={{ msg.receiver.chat_user.contact_user.avatar }}/>
+							{% endif %}
+	                    </div>
+                    </td>
+                    <td class="msg_display_cell msg_cell">
+	                    <div class="msg_box other_msg_box">{{ msg.content }}</div>
+                    </td>
+                    <td class="msg_display_cell msg_avatar_cell self_avatar_cell">
+                        <div class="msg_avatar_placeholder"></div>
+                    </td>
+                </tr>
+            </table>
+        </li>
+	{% endif %}
+{% endfor %}
+<script type="text/javascript">
+	var msgAvatarCell = $('.msg_avatar_cell');
+    msgAvatarCell.css('width', $('.msg_avatar_placeholder').outerWidth() + 'px');
+    $('.msg_cell').css('maxWidth', $('#right_col').width() - 2*msgAvatarCell.outerWidth()
+                                                           - 20 /* left and right padding */
+                                                           - 2 /* leeway */+ 'px');
+</script>

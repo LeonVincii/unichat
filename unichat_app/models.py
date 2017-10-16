@@ -93,6 +93,6 @@ class ChatList(models.Model):
 
 class Message(models.Model):
 	sender = models.ForeignKey(User)
-	receiver = models.ForeignKey(ChatList)
+	receiver = models.ForeignKey(Contact)
 	content = models.CharField(max_length = 9999)
 	create_datetime = models.DateTimeField(auto_now = True)
