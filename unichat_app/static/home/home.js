@@ -71,12 +71,12 @@ function requestToModifyRemark(contactUsername, newRemark) {
             'contact_remarkname': newRemark
         },
         success: function() {
-            requestContentForElement('#contact_list_panel', function() {
+            requestContentForElement('#chat_list_panel', function() {
                 initBulletinChatSize();
                 initRightPanel();
                 setDefaultChat();
             });
-            requestContentForElement('#chat_list_panel', function() {
+            requestContentForElement('#contact_list_panel', function() {
                 initRightPanel();
                 selectContact(contactUsername);
             });
