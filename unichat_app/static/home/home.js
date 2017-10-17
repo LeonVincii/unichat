@@ -103,21 +103,17 @@ function requestToSendMessage(receiver, msg) {
     })
 }
 
-function requestToReceiveMessageForUser(username) {
+function requestToReceiveMessageForUser(username, scroll) {
     $.ajax({
         type: 'GET',
         url: '/chat_session/' + username + '/',
         success: function(data) {
+            var msgDisplayWindow = ele('msg_display_window');
             $('#msg_display_list').html(data);
+
+            if (scroll) msgDisplayWindow.scrollTop = msgDisplayWindow.scrollHeight;
         }
     });
-}
-
-function autoRequestMessageForUser(username) {
-    if (username !== '')
-        setInterval(function() {
-            requestToReceiveMessageForUser(username);
-        }, 500);
 }
 
 function requestContentForElement(elementID, callback) {
@@ -287,7 +283,8 @@ function setupMidPanelClickEvents() {
                 /* Sets the chat title to be the contact's remark name. */
                 $('#msg_remark_name').text($(this).text());
                 var selectedChatUsername = $(this).find('.bulletin_chat_username').val();
-                $('#chat_username_container').val(selectedChatUsername);
+                var chatUsernameContainer = $('#chat_username_container');
+                chatUsernameContainer.val(selectedChatUsername);
             }
             else if ($(this).hasClass('bulletin_contacts')) {
                 $('.bulletin_contacts').not(this).css('backgroundColor', NORMAL_CONTACT_BACKGROUND_COLOR);
@@ -366,7 +363,16 @@ $('#right_col_chat').ready(function() {
     var msgTypingInput = $('#msg_typing_input');
 
     $('#chat_username_container').ready(function() {
-        autoRequestMessageForUser($('#chat_username_container').val());
+        setInterval(function() {
+            var username = $('#chat_username_container').val();
+            if (username !== '')
+                /* Scrolls the msg display window if the scroll-bar is at the bottom. */
+                var msgDisplayWindow = ele('msg_display_window');
+                if (msgDisplayWindow.scrollHeight - msgDisplayWindow.scrollTop == $('#msg_display_window').outerHeight() - 1)
+                    requestToReceiveMessageForUser(username, true);
+                else
+                    requestToReceiveMessageForUser(username, false);
+        }, 500);
     });
 
     msgSendBtn.prop('disabled', true);
