@@ -362,18 +362,18 @@ $('#right_col_chat').ready(function() {
     var msgSendBtn = $('#msg_send_btn');
     var msgTypingInput = $('#msg_typing_input');
 
-    // $('#chat_username_container').ready(function() {
-    //     setInterval(function() {
-    //         var username = $('#chat_username_container').val();
-    //         if (username !== '')
-    //             /* Scrolls the msg display window if the scroll-bar is at the bottom. */
-    //             var msgDisplayWindow = ele('msg_display_window');
-    //             if (msgDisplayWindow.scrollHeight - msgDisplayWindow.scrollTop == $('#msg_display_window').outerHeight() - 1)
-    //                 requestToReceiveMessageForUser(username, true);
-    //             else
-    //                 requestToReceiveMessageForUser(username, false);
-    //     }, 500);
-    // });
+    $('#chat_username_container').ready(function() {
+        setInterval(function() {
+            var username = $('#chat_username_container').val();
+            if (username !== '')
+                /* Scrolls the msg display window if the scroll-bar is at the bottom. */
+                var msgDisplayWindow = ele('msg_display_window');
+                if (msgDisplayWindow.scrollHeight - msgDisplayWindow.scrollTop == $('#msg_display_window').outerHeight() - 1)
+                    requestToReceiveMessageForUser(username, true);
+                else
+                    requestToReceiveMessageForUser(username, false);
+        }, 500);
+    });
 
     msgSendBtn.prop('disabled', true);
     $('#msg_contact_info').click(function() {

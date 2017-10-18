@@ -53,6 +53,10 @@
     min-width: 430px;
     background-color: rgb(243, 243, 243);
 }
+#right_col_info {
+    height: 100%;
+    width: 100%;
+}
 #msg_display_header {
     border-bottom: thin solid rgb(226, 226, 226);
     padding-left: 10px;
@@ -96,7 +100,6 @@
     width: 50px;
     border: none;
     background-color: rgb(0, 172, 72);
-
     margin: 10px;
 }
 #msg_send_btn:active {
@@ -130,7 +133,8 @@
     padding: 10px;
 }
 #info_table_container {
-    margin: 20px;
+    height: 100vh;
+    padding: 20px;
 }
 #info_avatar_cell {
     height: 100px;
@@ -148,6 +152,11 @@
 #start_chat_btn:active {
     border: none;
     background-color: rgb(0, 178, 55);
+}
+#add_contact_container {
+    height: 100vh;
+    width: 200px;
+    padding: 20px;
 }
 #log_out_btn {
     background-color: rgb(230, 30, 30);
@@ -178,6 +187,7 @@
     min-width: 800px;
     padding: 0;
     margin: 0;
+    background-color: rgb(243, 243, 243);
 }
 .btn-outline-secondary {
     border: none;
@@ -285,6 +295,7 @@
     word-wrap: break-word;
     text-align: left;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 .self_msg_box {
     position: relative;
