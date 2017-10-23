@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'comet',
     'unichat_app',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +137,10 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(STATICFILES_DIRS[0], 'media')
 
 MEDIA_URL = '/media/'
+
+CHANNEL_LAYERS = {
+    'default': {
+        "BACKEND": "asgiref.inmemory.ChannelLayer",
+        "ROUTING": "unichat_app.routing.channel_routing",
+    }
+}
